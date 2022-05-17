@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_entry">
+    <sys_transform_entry action="INSERT_OR_UPDATE">
+        <choice_action>ignore</choice_action>
+        <coalesce>false</coalesce>
+        <coalesce_case_sensitive>false</coalesce_case_sensitive>
+        <coalesce_empty_fields>false</coalesce_empty_fields>
+        <date_format>yyyy-MM-dd HH:mm:ss</date_format>
+        <map display_value="CyCognito Issues Transfer">d46d14c6878341506ab565b73cbb35bb</map>
+        <reference_value_field/>
+        <source_field>[Script]</source_field>
+        <source_script><![CDATA[answer = (function transformEntry(source) {
+    try {
+        gs.include("CyCognitoConstants");
+        var domain = x_cyin_cycognito.domain + "";
+        if (!gs.nil(source.u_id)) {
+            var id = source.u_id;
+            var vul = new GlideRecord(THIRD_PARTY_VULNERABILITY_TABLE);
+            vul.addQuery("id", id);
+            vul.addQuery("sys_domain", domain);
+            vul.addQuery("source", "CyCognito");
+            vul.setLimit(1);
+            vul.query();
+            if (vul.next())
+                return vul.getUniqueValue() + ""; // return the value to be put into the target field
+            // We don't have the vulnerability, create a stub
+            var thirdParty = new GlideRecord(THIRD_PARTY_VULNERABILITY_TABLE);
+            thirdParty.initialize();
+            thirdParty.id = source.u_id;
+            thirdParty.source = "CyCognito";
+            thirdParty.sys_domain = domain;
+            thirdParty.integration_run = x_cyin_cycognito.integrationProcessGr.integration_run;
+            return thirdParty.insert();
+        }
+    } catch (e) {
+        gs.error("Error occurred while creating vulnerability for CyCognito Issue having id " + source.u_id + ". Exception: " + e);
+    }
+})(source);]]></source_script>
+        <source_table>x_cyin_cycognito_cycognito_issues_staging_table</source_table>
+        <sys_class_name>sys_transform_entry</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-29 10:35:37</sys_created_on>
+        <sys_id>478fbd17878fcd10c529da483cbb35f7</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>[Script]</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_transform_entry_478fbd17878fcd10c529da483cbb35f7</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-11 05:06:20</sys_updated_on>
+        <target_field>vulnerability</target_field>
+        <target_table>sn_vul_vulnerable_item</target_table>
+        <use_source_script>true</use_source_script>
+    </sys_transform_entry>
+</record_update>

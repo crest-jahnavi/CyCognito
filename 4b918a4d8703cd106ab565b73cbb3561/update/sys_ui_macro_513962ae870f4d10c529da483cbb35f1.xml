@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>Filtering</name>
+        <scoped_name>x_cyin_cycognito_Filtering</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-27 05:35:50</sys_created_on>
+        <sys_id>513962ae870f4d10c529da483cbb35f1</sys_id>
+        <sys_mod_count>396</sys_mod_count>
+        <sys_name>Filtering</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_ui_macro_513962ae870f4d10c529da483cbb35f1</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-17 06:36:06</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+<style>
+	#issuetextboxarea 
+	{
+		box-sizing: border-box;
+		min-height: 20px;
+		height: 20px;
+		max-height: 20px;
+	}
+	.betweendate
+	{
+		display: none;
+		height:24px;
+	}
+	.notbetweendate
+	{
+		display: none;
+		height: 24px;
+		margin-left: 20px;
+	}
+</style>
+	
+	 
+	<script>
+		var c =2;
+		var idcount = 1;
+		id_issuecount = 1;
+		
+		$j(document).ready(function()
+		{
+			matrix.render_values();
+		});
+			
+		function removeRow(event)
+		{
+            var criteriaRows = $j(event.target).parent();
+			var criteriaRowCount = criteriaRows.length;
+            if (criteriaRowCount === 2) 
+			{
+                criteriaRows.each(function () {
+                    var criteriaRow = $j(this);
+                    var removeBtnCol = $j(criteriaRow.children()[1]);
+                    var removeBtn = $j(removeBtnCol.children()[0]);
+                    removeBtn.prop("disabled", true);
+                });
+            }
+			var removeRowBtn = $j(event.target);
+            var subRow = removeRowBtn.parent().parent();
+			if(subRow[0].id == "id_asset_field_name1" || subRow[0].id == "id_row_issue_field_name1"){
+				subRow.find(".textboxareaclass").val('');
+				subRow.find(".betweendate").val('');
+				subRow.find(".notbetweendate").val('');
+				subRow.find(".type").val('select');
+				subRow.find(".field_name").val('select');
+				subRow.find(".typedate").val('select');
+				
+				
+				subRow.find(".issuetextboxarea").val('');
+				subRow.find(".issue_betweendate").val('');
+				subRow.find(".issue_notbetweendate").val('');
+				subRow.find(".issue_field_name").val('select');
+				subRow.find(".issue_type").val('select');
+				subRow.find(".issue_type_date").val('select');
+
+				subRow.css('display','none');
+			}
+			else{
+            	subRow.remove();
+			//idcount--;
+			}
+		}
+		function addNewCriteria_asset() 
+		{
+			var prevSubRowElem = $j('tr[id^="id_asset_field_name"]:last');
+			var num = parseInt( prevSubRowElem.prop("id").match(/\d+/g), 10 ) +1;
+			if (num==2 $[JS:AND] prevSubRowElem[0].style.display=="none"){
+				prevSubRowElem.css('display','block');
+				return;
+			}
+			var newSubRowElem = prevSubRowElem.clone().prop('id', 'id_asset_field_name'+num );
+			newSubRowElem.css('display', 'block');
+			newSubRowElem.find(".field_name").prop('id', 'id_field_name'+ num);
+			newSubRowElem.find(".type").prop('id', 'id_type'+ num);
+			newSubRowElem.find(".typedate").prop('id', 'id_typedate'+ num);
+			newSubRowElem.find(".textboxareaclass").prop('id', 'id_textboxarea'+ num);
+			newSubRowElem.find(".textboxareaclass").val('');
+			newSubRowElem.find(".betweendate").prop('id', 'id_betweendate'+ num);
+			newSubRowElem.find(".betweendate").val('');
+			newSubRowElem.find(".notbetweendate").prop('id', 'id_notbetweendate'+ num);
+			newSubRowElem.find(".notbetweendate").val('');
+
+			newSubRowElem.insertAfter(prevSubRowElem);
+			
+			idcount++;
+
+			
+		}
+		function addNewCriteria_issue(){
+		
+			var prevSubRowElem = $j('tr[id^="id_row_issue_field_name"]:last');
+			var num = parseInt( prevSubRowElem.prop("id").match(/\d+/g), 10 ) +1;
+			if (num==2 $[JS:AND] prevSubRowElem[0].style.display=="none"){
+				prevSubRowElem.css('display','block');
+				return;
+			}
+			var newSubRowElem = prevSubRowElem.clone().prop('id', 'id_row_issue_field_name'+num );
+			newSubRowElem.css('display', 'block');
+			newSubRowElem.find(".issue_field_name").prop('id', 'id_issue_field_name'+ num);
+
+			newSubRowElem.find(".issue_type").prop('id', 'id_issue_type'+ num);
+
+			newSubRowElem.find(".issue_type_date").prop('id', 'id_issue_type_date'+ num);
+			newSubRowElem.find(".issuetextboxarea").prop('id', 'id_issuetextboxarea'+ num);
+			newSubRowElem.find(".issuetextboxarea").val('');
+
+			newSubRowElem.find(".issue_betweendate").prop('id', 'id_issue_betweendate'+ num);
+			newSubRowElem.find(".issue_betweendate").val('');
+			newSubRowElem.find(".issue_notbetweendate").prop('id', 'id_issue_notbetweendate'+ num);
+			newSubRowElem.find(".issue_notbetweendate").val('');
+			
+			newSubRowElem.insertAfter(prevSubRowElem);
+			
+			
+			id_issuecount++;
+			
+		}
+		function changeopt(event)
+		{
+			if($j(event.target).val()=="creation-time" || $j(event.target).val()=="expiration" || $j(event.target).val()=="first-seen"||$j(event.target).val()=="last-seen" )
+		{
+		
+			$j(event.target).parent().parent().find(".typedate").show();
+			$j(event.target).parent().parent().find(".type").hide();
+			$j(event.target).parent().parent().find(".textboxareaclass").hide();
+			$j(event.target).parent().parent().find(".betweendate").show();
+			$j(event.target).parent().parent().find(".notbetweendate").show();
+		
+		}
+		else
+		{
+			$j(event.target).parent().parent().find(".typedate").hide();
+			$j(event.target).parent().parent().find(".type").show();
+			$j(event.target).parent().parent().find(".textboxareaclass").show();
+			$j(event.target).parent().parent().find(".betweendate").hide();
+			$j(event.target).parent().parent().find(".notbetweendate").hide();
+		}
+			
+		}
+		
+		function changeopt_issue(event)
+		{
+			if($j(event.target).val()=="first-seen" || $j(event.target).val()=="last-seen" )
+			{
+			
+				$j(event.target).parent().parent().find(".issue_type_date").show();
+				$j(event.target).parent().parent().find(".issue_type").hide();
+				$j(event.target).parent().parent().find(".issuetextboxarea").hide();
+				$j(event.target).parent().parent().find(".issue_betweendate").show();
+				$j(event.target).parent().parent().find(".issue_notbetweendate").show();
+			}
+			else
+			{
+				$j(event.target).parent().parent().find(".issue_type_date").hide();
+				$j(event.target).parent().parent().find(".issue_type").show();
+				$j(event.target).parent().parent().find(".issuetextboxarea").show();
+				$j(event.target).parent().parent().find(".issue_betweendate").hide();
+				$j(event.target).parent().parent().find(".issue_notbetweendate").hide();
+			}
+			
+		}
+	
+		function isObjectNull(obj){
+			if (["creation-time", "expiration", "first-seen", "last-seen"].indexOf(obj.field) !=-1){
+				if (obj.values.length!=1 || obj.values[0].length!=2 || obj.values[0][0] == "" || obj.values[0][1] == "")
+					return true
+				if (!idValidDate(obj.values[0][0], obj.values[0][1])){
+					g_form.addErrorMessage("The Start Date must be earlier than The End Date");
+					throw "The Start Date must be earlier than The End Date" ;
+				}
+			}
+
+			if ( !obj.field ||  obj.field=="select" || !obj.op || obj.op=="select" || obj.values.length  ${AMP}lt; 1 || obj.values[0]== "")
+				return true
+
+			return false
+		}
+
+		function idValidDate(date1, date2){
+			var g1 = new Date(date1);
+			var g2 = new Date(date2);
+			
+			if (g1.getTime() >= g2.getTime())
+				return false;
+			return true;
+		}
+
+		function splitValues(s){
+			var result = [];
+			if(s){
+				var ar = s.split(",");
+				var n = ar.length;
+				for(var x=0 ; x ${AMP}lt; n; x++){
+					ar[x] = ar[x] + "";
+					ar[x] = ar[x].trim();
+					if (ar[x]!="")
+						result.push(ar[x]);
+				}
+			}
+			return result;
+		}
+	
+		var matrix = {
+		sections: [0, 1]
+	};
+	matrix.submit = function() {
+		
+		g_form.clearMessages();
+		var arrVendorValues = {
+			"issues":[],
+			"assets":[]
+		}
+		if(idcount>0)
+		{			
+			//idcount++;
+			for (var i = 1; i ${AMP}lt; idcount+1; i++)
+			{
+				var row_num = i;
+				var objectToAdd = {};
+				var Fields = $j("#id_field_name"+row_num);
+				if(Fields.val()=="creation-time" || Fields.val()=="expiration" || Fields.val()=="first-seen" || Fields.val()=="last-seen"){
+					var operation_date = $j("#id_typedate"+row_num);
+					var betdate = $j("#id_betweendate"+row_num);
+					var notbetdate = $j("#id_notbetweendate"+row_num);
+					objectToAdd["field"] = Fields.val();
+					objectToAdd["op"] = operation_date.val();
+					objectToAdd["values"] = [[betdate.val(),notbetdate.val()]];
+				}
+			
+				else
+				{ 
+					var operation =  $j("#id_type"+row_num);					
+					var text_box = $j("#id_textboxarea"+row_num);
+					objectToAdd["field"] = Fields.val();
+					objectToAdd["op"] = operation.val();
+					objectToAdd["values"] = splitValues(text_box.val());
+				}
+				if (!isObjectNull(objectToAdd))
+					arrVendorValues.assets.push(objectToAdd);
+				else if($j('#id_asset_field_name'+row_num)[0] $[JS:AND] "none" != $j('#id_asset_field_name'+row_num)[0].style.display){
+					g_form.addErrorMessage("Empty values are not allowed in the Assets filter condition");
+					throw "Empty values are not allowed in the Assets filter condition" ;
+				}
+				
+		}	
+		}
+		if(id_issuecount>0)
+		{			
+			//id_issuecount++;
+			for (var i = 1; i ${AMP}lt; id_issuecount+1; i++)
+			{
+				var row_num = i;
+				var objectToAdd = {};
+				var Fields = $j("#id_issue_field_name"+row_num);
+
+				if(Fields.val()=="first-seen" || Fields.val()=="last-seen"){
+					var operation_date = $j("#id_issue_type_date"+row_num);
+					var betdate = $j("#id_issue_betweendate"+row_num);
+					var notbetdate = $j("#id_issue_notbetweendate"+row_num);;
+					objectToAdd["field"] = Fields.val();
+					objectToAdd["op"] = operation_date.val();
+					objectToAdd["values"] = [[betdate.val(),notbetdate.val()]];
+				}
+			
+				else
+				{ 
+					var operation =  $j("#id_issue_type"+row_num);					
+					var text_box = $j("#id_issuetextboxarea"+row_num);
+					objectToAdd["field"] = Fields.val();
+					objectToAdd["op"] = operation.val();
+					objectToAdd["values"] = splitValues(text_box.val());
+					
+				}
+				if (!isObjectNull(objectToAdd))
+					arrVendorValues.issues.push(objectToAdd);
+				else if($j('#id_row_issue_field_name'+row_num)[0] $[JS:AND] "none" != $j('#id_row_issue_field_name'+row_num)[0].style.display){
+					g_form.addErrorMessage("Empty values are not allowed in the Issues filter condition");
+					throw "Empty values are not allowed in the Issues filter condition" ;
+				}
+				
+		}
+		}
+			g_form.setValue("mapping_data",JSON.stringify(arrVendorValues));
+	};
+		matrix.render_values = function(){
+			var a = g_form.getValue("mapping_data");
+			b = JSON.parse(a);
+			var issues = b.issues;
+			var issue = 0;
+			var asset = 0;
+			if (issues.length == 0){
+				$j("#id_row_issue_field_name1").css('display', 'none');
+			}
+			for (var i = 0; i ${AMP}lt; issues.length; i++)
+			{
+				issue++;
+				if(issue == 1)
+				{
+					$j("#id_row_issue_field_name1").css("display", "block");
+					if(issues[i].field == "last-seen" || issues[i].field == "first-seen")
+					{	
+						$j("#id_issue_type_date1").show();
+						$j("#id_issue_type1").hide();
+						$j("#id_issue_betweendate1").show();
+						$j("#id_issue_notbetweendate1").show();
+						$j("#id_issuetextboxarea1").hide()
+						$j("#id_issue_field_name1").val(issues[i].field);
+						$j("#id_issue_type_date1").val(issues[i].op);
+						$j("#id_issue_betweendate1").val(issues[i].values[0][0]);
+						$j("#id_issue_notbetweendate1").val(issues[i].values[0][1]);
+					} else{
+						$j("#id_issue_type_date1").hide();
+						$j("#id_issue_type1").show();
+						$j("#id_issue_betweendate1").hide();
+						$j("#id_issue_notbetweendate1").hide();
+						$j("#id_issuetextboxarea1").show();
+
+						$j("#id_issue_field_name1").val(issues[i].field);
+						$j("#id_issue_type1").val(issues[i].op);
+						$j("#id_issuetextboxarea1").val(issues[i].values);
+					}
+				}
+				else
+				{
+					if (id_issuecount ${AMP}lt; issue)
+						addNewCriteria_issue();
+					if(issues[i].field == "last-seen" || issues[i].field == "first-seen")
+					{
+						$j("#id_issue_type_date"+issue).show();
+						$j("#id_issue_type"+issue).hide();
+						$j("#id_issue_betweendate"+issue).show();
+						$j("#id_issue_notbetweendate"+issue).show();
+						$j("#id_issuetextboxarea"+issue).hide();
+						$j("#id_issue_field_name"+issue).val(issues[i].field);
+						$j("#id_issue_type_date"+issue).val(issues[i].op);
+						$j("#id_issue_betweendate"+issue).val(issues[i].values[0][0]);
+						$j("#id_issue_notbetweendate"+issue).val(issues[i].values[0][1]);
+					}else{
+						$j("#id_issue_type_date"+issue).hide();
+						$j("#id_issue_type"+issue).show();
+						$j("#id_issue_betweendate"+issue).hide();
+						$j("#id_issue_notbetweendate"+issue).hide();
+						$j("#id_issuetextboxarea"+issue).show();
+
+						$j("#id_issue_field_name"+issue).val(issues[i].field);
+						$j("#id_issue_type"+issue).val(issues[i].op);
+						$j("#id_issuetextboxarea"+issue).val(issues[i].values);
+					}
+				}
+			}
+			var assets = b.assets;
+			if (assets.length==0){
+				$j("#id_asset_field_name1").css('display', 'none');
+			}
+			for (var i = 0; i ${AMP}lt; assets.length; i++)
+			{
+				asset++;
+				if(asset == 1)
+				{
+					$j("#id_asset_field_name1").css("display", "block");
+					if(assets[i].field == "expiration" || assets[i].field == "creation-time" ||assets[i].field == "first-seen" || assets[i].field == "last-seen"){
+					$j("#id_type1").hide();
+					$j("#id_textboxarea1").hide();
+					$j("#id_typedate1").show();
+					$j("#id_betweendate1").show();
+					$j("#id_notbetweendate1").show();
+					$j("#id_field_name1").val(assets[i].field);
+					$j("#id_typedate1").val(assets[i].op);
+					$j("#id_betweendate1").val(assets[i].values[0][0]);
+					$j("#id_notbetweendate1").val(assets[i].values[0][1]);
+				} else{
+					$j("#id_typedate1").hide();
+					$j("#id_betweendate1").hide();
+					$j("#id_notbetweendate1").hide();
+					$j("#id_type1").show();
+					$j("#id_textboxarea1").show();
+
+					$j("#id_field_name1").val(assets[i].field);
+					$j("#id_type1").val(assets[i].op);
+					$j("#id_textboxarea1").val(assets[i].values);
+					
+				}
+				}
+				else
+				{
+					if (idcount ${AMP}lt; asset)
+						addNewCriteria_asset();
+					if(assets[i].field == "expiration" || assets[i].field == "creation-time" ||assets[i].field == "first-seen" || assets[i].field == "last-seen"){
+					$j("#id_type"+asset).hide();
+					$j("#id_textboxarea"+asset).hide();
+					$j("#id_typedate"+asset).show();
+					$j("#id_betweendate"+asset).show();
+					$j("#id_notbetweendate"+asset).show();
+					$j("#id_field_name"+asset).val(assets[i].field);
+					$j("#id_typedate"+asset).val(assets[i].op);
+					$j("#id_betweendate"+asset).val(assets[i].values[0][0]);
+					$j("#id_notbetweendate"+asset).val(assets[i].values[0][1]);
+				} else{
+					$j("#id_typedate"+asset).hide();
+					$j("#id_betweendate"+asset).hide();
+					$j("#id_notbetweendate"+asset).hide();
+					$j("#id_type"+asset).show();
+					$j("#id_textboxarea"+asset).show();
+
+					$j("#id_field_name"+asset).val(assets[i].field);
+					$j("#id_type"+asset).val(assets[i].op);
+					$j("#id_textboxarea"+asset).val(assets[i].values);
+
+				}
+				}
+			}
+			
+		};
+		
+		
+		
+		
+	
+	</script>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

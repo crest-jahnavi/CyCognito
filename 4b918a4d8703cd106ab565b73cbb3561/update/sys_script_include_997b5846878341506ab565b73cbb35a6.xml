@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_cyin_cycognito.CyCognitoUtils</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Script contains all the utility functions which are used in other scripts.</description>
+        <name>CyCognitoUtils</name>
+        <script><![CDATA[var CyCognitoUtils = Class.create();
+CyCognitoUtils.prototype = {
+    initialize: function() {
+        this.implUtil = new sn_sec_int.Implementation();
+        gs.include("CyCognitoConstants");
+        this.count = gs.getProperty('x_cyin_cycognito.page_size_on_cloud');
+    },
+
+    /**
+     * Function to validate inserted credentials and check for duplicate name or integration instance
+     * @param {object} current: table record 
+     * @param {boolean} stay: flag value to setRedirect link
+     */
+    validateCredential: function(current, stay) {
+        try {
+            var error = false;
+            // Check if Integration instance is already mapped with other configuration or not.
+            var configGr = new GlideRecord(CYCOGNITO_CONFIG_TABLE);
+            current.name = current.name.trim();
+            configGr.addEncodedQuery("name=" + current.name + "^sys_domain=" + current.sys_domain);
+            if (!gs.nil(current))
+                configGr.addQuery("sys_id", "!=", current.sys_id);
+            configGr.setLimit(1);
+            configGr.query();
+            if (configGr.next()) {
+                gs.addErrorMessage("Authentication Configuration record already exists with the entered Name");
+                gs.error("Authentication Configuration record already exists with the entered name: " + current.name);
+                error = true;
+            }
+            if (!this.validateKey(current.key.getDecryptedValue().trim())) {
+                gs.addErrorMessage("Inserted key is invalid. Please insert valid key");
+                gs.error("Inserted key is invalid for the authentication configuration record: " + current.name);
+                error = true;
+            }
+            if (error) {
+                current.setAbortAction(true);
+                gs.setRedirect(current.getLink(true));
+            } else {
+                if (stay) {
+                    gs.setRedirect(current.getLink(true));
+                }
+                if (!current.update()) {
+                    gs.error("Error occurred while updating authentication configuration record with name: " + current.name);
+                }
+            }
+        } catch (e) {
+            gs.error("[validateCredential] Error occurred while validating credentials. Exception: " + e);
+        }
+    },
+
+    /**
+     * Check whether inserted key is valid or not
+     * @param {string} key
+     *
+     * @returns {false} If invalid key inserted
+     */
+    validateKey: function(key) {
+        try {
+            var valid = '';
+            var rest = new sn_ws.RESTMessageV2();
+            rest.setHttpMethod('POST');
+
+            rest.setEndpoint(BASE_URL + "/v0/tap-crestds-acme/issues");
+//             rest.setRequestHeader('Authorization', key);
+			rest.setQueryParameter("key", key + '');
+            rest.setRequestHeader('Accept', 'application/json');
+            rest.setRequestHeader('User-Agent', '');
+			rest.setRequestHeader('Content-Type', 'application/json');
+            rest.setRequestBody('{}');
+			
+            rest.setQueryParameter("count", 1);
+
+            var resp = rest.executeAsync();
+            resp.waitForResponse(10);
+            var statusCode = resp.getStatusCode();
+            var resBody;
+            if (!gs.nil(resp.getBody()))
+                resBody = JSON.parse(resp.getBody());
+            // If invalid key inserted
+
+            if (statusCode != 200 || !gs.nil(resBody.error))
+                valid = false;
+            else
+                valid = true;
+            return valid;
+        } catch (e) {
+            gs.error("[validateKey] Error occurred while validating key. Exception: " + e);
+            return false;
+        }
+    },
+
+    /**
+     * Get Authenticaion Configuration record associated with Integration Instance
+     * 
+     * @param {GlideRecord} integrationGr
+     * @return {Object} requestBody with applied filter
+     */
+    getRequestBodyFromProfile: function(integrationGr) {
+        var requestBody = '{}';
+        var profileGr = new GlideRecord(CYCOGNITO_CONFIG_TABLE);
+        profileGr.addQuery("integration_instance", integrationGr.instance + '');
+        profileGr.addQuery("sys_domain", integrationGr.run_as.sys_domain + '');
+        profileGr.setLimit(1);
+        profileGr.query();
+        if (profileGr.next()) {
+            if (!gs.nil(profileGr.mapping_data))
+                requestBody = profileGr.mapping_data + '';
+        }
+        return requestBody;
+    },
+
+
+    /**
+     * Function to handle status code
+     * 
+     * @param {Integer} statusCode
+     * @return {String} Error Message
+     */
+    handleStatusCode: function(statusCode) {
+        var errorMessage = '';
+        if (statusCode == 400) {
+            errorMessage = "Invalid response code received from CyCognito: Bad Request " + statusCode;
+        } else if (statusCode == 401) {
+            errorMessage = "Invalid response code received from CyCognito: Unauthorized " + statusCode;
+        } else if (statusCode == 404) {
+            errorMessage = "Invalid response code received from CyCognito: Not Found " + statusCode;
+        } else if (statusCode == 500) {
+            errorMessage = "Invalid response code received from CyCognito: Internal Server Error " + statusCode;
+        } else {
+            errorMessage = "Invalid response code received from CyCognito: " + statusCode;
+        }
+        return errorMessage;
+    },
+
+    /**
+     * Function to build REST message
+     * @param {Object} JSON object contains request body and parameter
+     * @return {Object} rest message
+     */
+    buildRestMessage: function(requestParameter) {
+        var rest = new sn_ws.RESTMessageV2();
+        rest.setHttpMethod('POST');
+
+        rest.setEndpoint(requestParameter.endpoint + '');
+        rest.setQueryParameter("count", this.count + '');
+        rest.setQueryParameter("offset", requestParameter.offset + '');
+        rest.setRequestBody(requestParameter.requestBody + '');
+
+        rest.setRequestHeader('Accept', 'application/json');
+        rest.setRequestHeader('Content-Type', 'application/json');
+        rest.setRequestHeader('User-Agent', '');
+        //rest.setRequestHeader('Authorization', requestParameter.key + '');
+        rest.setQueryParameter("key", requestParameter.key + '');
+
+        return rest;
+    },
+
+    /**
+     * Function to set configuration parameter
+     */
+    setConfig: function(integrationGrInstance) {
+        try {
+            return new sn_sec_int.Implementation().getConfiguration(integrationGrInstance);
+        } catch (e) {
+            gs.warn("[CyCognito] Got error when trying to set the configuration: " + e);
+            throw new Error("[CyCognito] Got error when trying to set the configuration: " + e);
+        }
+    },
+
+    /**
+     * Checks whether instanceId is empty or not
+     * @param {object} current: table record 
+     */
+    saveAndTestInstanceParams: function(current) {
+        try {
+            var instanceId = current.getValue('integration_instance');
+            if (gs.nil(instanceId)) {
+                gs.error('[saveAndTestInstanceParams] No integration instance is available.');
+                return;
+            }
+            this._saveInstanceParams(instanceId, current);
+        } catch (ex) {
+            gs.error('[saveAndTestInstanceParams] Error in Instance Integration. Exception: ' + ex);
+        }
+    },
+
+
+    /**
+     * Stores Instance Parameters for Integration Instance
+     * @param {object} instanceId: integration instance ID
+     * @param {object} config: table record 
+     */
+    _saveInstanceParams: function(instanceId, config) {
+        try {
+            var configObj = {
+                key: config.key.getDecryptedValue(),
+                config_sys_id: config.getValue('sys_id'),
+            };
+            this.implUtil.setConfiguration(instanceId, configObj);
+            this._updateInstanceValidationStatus(instanceId, 'valid');
+        } catch (ex) {
+            gs.error('[_SaveInstanceParams] Error in Saving Instance Parameters. Exception: ' + ex);
+        }
+    },
+
+    /**
+     * Update instance status
+     * @param {object} instanceId: integration instance ID
+     * @param {object} validationStatus: validation status 
+     */
+    _updateInstanceValidationStatus: function(instanceId, validationStatus) {
+        var implGR = new GlideRecord(INTEGRATION_INSTANCE);
+        if (implGR.get(instanceId)) {
+            implGR.validation_status = validationStatus;
+            implGR.update();
+        }
+    },
+
+    /**
+     * Update scheduling of Integrations
+     * @param {object} instanceId: integration instance ID
+     */
+    updateIntegrationScheduling: function(instanceId, domain) {
+        var gr = new GlideRecord(CYCOGNITO_INTEGRATION_TABLE);
+        gr.addQuery("instance", instanceId);
+        gr.addQuery("sys_domain", domain);
+        gr.query();
+
+        while (gr.next()) {
+            gr.run_type = "daily";
+            gr.update();
+        }
+    },
+
+
+    type: 'CyCognitoUtils'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-25 05:59:53</sys_created_on>
+        <sys_id>997b5846878341506ab565b73cbb35a6</sys_id>
+        <sys_mod_count>117</sys_mod_count>
+        <sys_name>CyCognitoUtils</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_script_include_997b5846878341506ab565b73cbb35a6</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-17 07:00:22</sys_updated_on>
+    </sys_script_include>
+</record_update>

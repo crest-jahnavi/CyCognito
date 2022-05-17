@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_cyin_cycognito.CyCognitoConstants</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>To list down all the constants used in other script includes.</description>
+        <name>CyCognitoConstants</name>
+        <script><![CDATA[var CYCOGNITO_CONFIG_TABLE = "x_cyin_cycognito_incident_profile";
+var QUEUE_ENTRY_TABLE = "sn_vul_ds_import_q_entry";
+var ITEM_CONFIG_TABLE = "sn_sec_core_integration_item_config";
+var CYCOGNITO_INTEGRATION_TABLE = "x_cyin_cycognito_cycognito_integration";
+var SYSTEM_USER_TABLE = "sys_user";
+var THIRD_PARTY_VULNERABILITY_TABLE = "sn_vul_third_party_entry";
+var VULNERABILITY_INTEGRATION_PROCESS = "sn_vul_integration_process";
+var INTEGRATION_INSTANCE = "sn_sec_int_impl";
+
+var BASE_URL = "https://api.platform.cycognito.com";]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-25 05:45:35</sys_created_on>
+        <sys_id>f4c754c2878341506ab565b73cbb3522</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>CyCognitoConstants</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_script_include_f4c754c2878341506ab565b73cbb3522</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-10 10:24:57</sys_updated_on>
+    </sys_script_include>
+</record_update>

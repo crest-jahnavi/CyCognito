@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_sec_int_impl">
+    <sn_sec_int_impl action="DELETE">
+        <active>true</active>
+        <description/>
+        <integration display_value="CyCognito Vulnerability Response Integration">b65337fe87cb8d10c529da483cbb35a4</integration>
+        <is_default>false</is_default>
+        <name>Dummy</name>
+        <sys_class_name>sn_sec_int_impl</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-12 05:39:05</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>4ed9331f879bc1106ab565b73cbb35d5</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Dummy</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sn_sec_int_impl_4ed9331f879bc1106ab565b73cbb35d5</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-16 12:05:23</sys_updated_on>
+        <validation_status>unvalidated</validation_status>
+    </sn_sec_int_impl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</application>
+        <file_path/>
+        <instance_id>6cca6988db7f381091232f17d4961929</instance_id>
+        <instance_name>ven05073</instance_name>
+        <name>sn_sec_int_impl_4ed9331f879bc1106ab565b73cbb35d5</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_sec_int_impl"><sn_sec_int_impl action="INSERT_OR_UPDATE"><active>true</active><description/><integration display_value="CyCognito Vulnerability Response Integration">b65337fe87cb8d10c529da483cbb35a4</integration><is_default>false</is_default><name>Dummy</name><sys_class_name>sn_sec_int_impl</sys_class_name><sys_created_by>tap-crestds</sys_created_by><sys_created_on>2022-05-12 05:39:05</sys_created_on><sys_domain>global</sys_domain><sys_id>4ed9331f879bc1106ab565b73cbb35d5</sys_id><sys_mod_count>2</sys_mod_count><sys_name>Dummy</sys_name><sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package><sys_policy/><sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope><sys_update_name>sn_sec_int_impl_4ed9331f879bc1106ab565b73cbb35d5</sys_update_name><sys_updated_by>tap-crestds</sys_updated_by><sys_updated_on>2022-05-16 12:05:23</sys_updated_on><validation_status>unvalidated</validation_status></sn_sec_int_impl></record_update>]]></payload>
+        <payload_hash>1062470021</payload_hash>
+        <record_name>Dummy</record_name>
+        <reverted_from/>
+        <source>dc11369a87434d10c529da483cbb35c4</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-16 12:05:23</sys_created_on>
+        <sys_id>69a8b97087e34110c529da483cbb352a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>180ccc23eeb0000001</sys_recorded_at>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-16 12:05:23</sys_updated_on>
+        <type>Integration Instance</type>
+        <update_guid>ada8b97054e34110d839ac01444e8229</update_guid>
+        <update_guid_history>ada8b97054e34110d839ac01444e8229:1062470021,9d0ab71fee9bc110a7cecbc824fe83a0:-1907728084,bfd9371f2f9bc1101f981819f460692c:1062470021</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">c94b46fc87e34110c529da483cbb35d5</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-16 13:26:44</sys_created_on>
+        <sys_db_object display_value="" name="sn_sec_int_impl">sn_sec_int_impl</sys_db_object>
+        <sys_id>3ed7e35c12fd491b9e0b3d8032ede281</sys_id>
+        <sys_metadata>4ed9331f879bc1106ab565b73cbb35d5</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Dummy</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_scope_delete display_value="">20f9fe902b164a97b557f59be8c385d1</sys_scope_delete>
+        <sys_update_name>sn_sec_int_impl_4ed9331f879bc1106ab565b73cbb35d5</sys_update_name>
+        <sys_update_version display_value="sn_sec_int_impl_4ed9331f879bc1106ab565b73cbb35d5">69a8b97087e34110c529da483cbb352a</sys_update_version>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-16 13:26:44</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

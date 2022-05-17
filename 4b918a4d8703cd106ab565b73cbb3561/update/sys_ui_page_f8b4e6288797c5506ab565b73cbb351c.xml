@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var interactiveReports = [];
+var Assets = ['category', 'sys_class_name', 'operational_status'];
+var Vulnerable_Items = ['risk_score', 'risk_rating', 'state'];
+
+function makeInteractive(id, params, table) {
+    interactiveReports.push({
+        element: $j("#" + id),
+        params: params,
+        table_name: table
+    });
+}
+
+function applyFilter() {
+    var fromDateValue = $j('#start_date').val();
+    var toDateValue = $j('#end_date').val();
+    var fromDate = new Date(fromDateValue);
+    var toDate = new Date(toDateValue);
+    var query = "sys_updated_onBETWEENjavascript:gs.dateGenerate('" + fromDateValue + "','00:00:00')@javascript:gs.dateGenerate('" + toDateValue + "','23:59:59')";
+
+    if (fromDate > toDate) {
+        var error = $j('#error');
+        error.html("Start Date must be earlier than End Date");
+        error.show();
+        $j('#start_date').val('');
+        $j('#end_date').val('');
+    } else if (fromDateValue && toDateValue) {
+        $j('#error').css("display", "none");
+        renderReports("", "", query);
+    } else {
+        var error1 = $j('#error');
+        if (!fromDateValue && !toDateValue) {
+            error1.html("Please insert Start Date and End Date");
+            error1.show();
+        } else if (!fromDateValue) {
+            error1.html("Please insert Start Date");
+            error1.show();
+
+        } else if (!toDateValue) {
+            error1.html("Please insert End Date");
+            error1.show();
+        }
+
+    }
+
+
+}
+
+function clearFilter() {
+    $j('#start_date').val('');
+    $j('#end_date').val('');
+    $j('#error').css("display", "none");
+}
+
+$j("#type").ready(function() {
+    $j("#type").select2({
+        data: [{
+                text: "Category",
+                id: "category"
+            }, {
+                text: "Class",
+                id: "sys_class_name"
+            },
+            {
+                text: "Operational Status",
+                id: "operational_status"
+            },
+
+        ]
+    });
+
+    $j("#type").select2('val', 'category');
+
+    $j("#type").change(function(e) {
+        renderReports(e.added.id, e.added.text);
+    });
+});
+
+$j("#vi-type").ready(function() {
+    $j("#vi-type").select2({
+        data: [{
+                text: "Risk Score",
+                id: "risk_score"
+            }, {
+                text: "Risk Rating",
+                id: "risk_rating"
+            },
+            {
+                text: "State",
+                id: "state"
+            },
+
+        ]
+    });
+
+    $j("#vi-type").select2('val', 'risk_score');
+
+    $j("#vi-type").change(function(e) {
+        renderReports(e.added.id, e.added.text);
+    });
+});
+
+$j("#date-type").ready(function() {
+    $j("#date-type").select2({
+        data: [{
+                text: "This Week",
+                id: "week"
+            }, {
+                text: "All",
+                id: "all"
+            },
+            {
+                text: "Custom Date",
+                id: "date"
+            },
+
+        ]
+    });
+
+    $j("#date-type").select2('val', 'week');
+
+    $j("#date-type").change(function(e) {
+        var query = " ";
+		if(e.added.id == "week"){
+			clearFilter();
+			$j('#date').css("display","none");
+			query = "sys_updated_onONThis week@javascript:gs.beginningOfThisWeek()@javascript:gs.endOfThisWeek()";
+			renderReports("","",query);
+		}else if(e.added.id == "all"){
+			clearFilter();
+			$j('#date').css("display","none");
+			renderReports("","",query);
+		}else {
+			$j('#date').css("display","flex");
+		}
+    });
+});
+
+function renderReports(field, text, query) {
+
+    for (var j in interactiveReports) {
+
+        if (query) {
+            if (interactiveReports[j].table_name == 'Asset') {
+                interactiveReports[j].params.sysparm_query = query;
+            } else {
+                interactiveReports[j].params.sysparm_query =  "source=CyCognito^" + query;
+
+            }
+        }
+        if (!interactiveReports[j].params)
+            continue;
+
+        if (field && Assets.indexOf(field) != -1 && interactiveReports[j].table_name == 'Asset') {
+            interactiveReports[j].params.sysparm_field = field;
+            interactiveReports[j].params.sysparm_title = "Configuration Item " + text;
+            embedReportByParams(interactiveReports[j].element, interactiveReports[j].params);
+
+        }
+        if (field && Vulnerable_Items.indexOf(field) != -1 && interactiveReports[j].table_name == 'Vulnerable_Item') {
+            interactiveReports[j].params.sysparm_field = field;
+            interactiveReports[j].params.sysparm_title = "Vulnerable Item " + text;
+            embedReportByParams(interactiveReports[j].element, interactiveReports[j].params);
+
+        }
+        if (!field) {
+            embedReportByParams(interactiveReports[j].element, interactiveReports[j].params);
+
+        }
+    }
+
+}
+
+makeInteractive('ci_report_asset', {
+    sysparm_type: "donut",
+    sysparm_table: "cmdb_ci",
+    sysparm_aggregate: "COUNT",
+    sysparm_show_legend: "true",
+    sysparm_title: "Configuration Item Category",
+    sysparm_display_value: "true",
+    sysparm_field: "category",
+	sysparm_query: "sys_updated_onONThis week@javascript:gs.beginningOfThisWeek()@javascript:gs.endOfThisWeek()"
+}, 'Asset');
+
+makeInteractive('vi_report', {
+    sysparm_type: "donut",
+    sysparm_table: "sn_vul_vulnerable_item",
+    sysparm_aggregate: "COUNT",
+    sysparm_title: "Vulnerable Item Risk Score",
+    sysparm_show_legend: "true",
+    sysparm_display_value: "true",
+    sysparm_field: "risk_score",
+	sysparm_query: "sys_updated_onONThis week@javascript:gs.beginningOfThisWeek()@javascript:gs.endOfThisWeek()^source=CyCognito"
+}, 'Vulnerable_Item');
+
+renderReports();]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_cyin_cycognito_cycognito_dashboard.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:inline template="reporting_includes.xml" />
+	<style>
+		.Report 
+		{
+			display:flex;
+			flex-direction:column;
+			background-color:#EEF2F7;
+			margin : -4.5px;
+		}
+		.Main
+		{
+			display:flex;
+			height:500px;
+			flex-direction:column;
+			box-shadow: 0 3px 10px rgba(0 0 0 / 0.4);
+			margin:20px;
+			border-radius: 10px;
+			background-color:white;
+
+		}
+		.group3{
+			flex-grow:1;
+		}
+		.group4{
+			flex-grow:1;
+		}
+		.select-category{
+			align-self:center;
+			margin-bottom:5px;
+			width:275px;
+			display:flex;
+			row-gap:15px;
+			
+		}
+		.font-style{
+			align-self:center;
+			flex-grow:1;
+			font-size:15px;
+		}
+		.select-date{
+			margin-bottom:5px;
+			margin-top:25px;
+			width:275px;
+			display:flex;
+			margin-left:25px;
+		}
+		.date{
+			display:none;
+			column-gap:10px;
+			margin:10px;
+		}
+		.between{
+			
+			align-self:flex-end;
+			margin-left:5px;
+			margin-right:5px;
+			
+		}
+		.filter-btn{
+			margin-left:5px;
+		}
+		.select{
+			width:150px;
+		}
+		input[type="button"]{
+			border-radius : 5px;
+			box-shadow:
+				   -1px -1px 20px 0px rgba(255,255,255,1),
+				   -4px -4px 5px 0px rgba(255,255,255,1),
+				   7px 7px 20px 0px rgba(0,0,0,.4),
+				   4px 4px 5px 0px rgba(0,0,0,.3);
+			border : 0;
+			background-color:#0E284E;
+			width : 130px;
+			height:40px;
+		    align-self: flex-end;
+			color:white;
+		}
+		input[type="date"]{
+			border : 0;
+			box-shadow: 0 3px 10px rgba(0 0 0 / 0.4);
+			border-radius : 3px;
+			padding : 5px;
+			margin-left:10px;
+			
+		}
+		.tooltip-ci {
+			  position: relative;
+			  display: inline-block;
+		}
+
+		.tooltip-ci .tooltiptext-ci {
+		  visibility: hidden;
+		  width: 250px;
+		  background-color: black;
+		  color: #fff;
+		  text-align: center;
+		  border-radius: 6px;
+		  padding: 5px 0;
+		  position: absolute;
+		  z-index: 1;
+		  top: 150%;
+		  left: 50%;
+		  margin-left: -60px;
+		}
+
+		.tooltip-ci .tooltiptext-ci::after {
+		  content: "";
+		  position: absolute;
+		  bottom: 100%;
+		  left: 30%;
+		  margin-left: -5px;
+		  border-width: 5px;
+		  border-style: solid;
+		  border-color: transparent transparent black transparent;
+		}
+
+		.tooltip-ci:hover .tooltiptext-ci {
+		  visibility: visible;
+		}
+		.tooltip-vi {
+			  position: relative;
+			  display: inline-block;
+		}
+
+		.tooltip-vi .tooltiptext-vi {
+		  visibility: hidden;
+		  width: 250px;
+		  background-color: black;
+		  color: #fff;
+		  text-align: center;
+		  border-radius: 6px;
+		  padding: 5px 0;
+		  position: absolute;
+		  z-index: 1;
+		  top: 150%;
+		  left: 50%;
+		  margin-left: -60px;
+		}
+
+		.tooltip-vi .tooltiptext-vi::after {
+		  content: "";
+		  position: absolute;
+		  bottom: 100%;
+		  left: 30%;
+		  margin-left: -5px;
+		  border-width: 5px;
+		  border-style: solid;
+		  border-color: transparent transparent black transparent;
+		}
+
+		.tooltip-vi:hover .tooltiptext-vi {
+		  visibility: visible;
+		}
+		.Header{
+			display:flex;
+			justify-content : space-between;
+			padding : 10px;
+			background-color:white;
+		}
+		.title{
+			margin-left:10px;
+			font-size : 3.5em
+		}
+		.logo{
+			margin-right:10px;
+		}
+		.date_field{
+			display:flex;
+			flex-direction:column;
+		}
+		.date_area{
+			display:flex;
+			flex-direction:column;
+		}
+		.error{
+			display:none;
+			background-color:#ffdadc;
+			font-size:15px;
+			margin-left:18px;
+			margin-top:10px;
+			padding:10px;
+			width:580px;
+		}	
+		.select-VI{
+			align-self:center;
+		}
+	</style>
+	
+	<div class = "Report">
+		<div class="Header">
+			<div class="title">CyCognito DashBoard</div>
+			<div class="logo"><img src="CycognitoLogo.png" width="95" height="60" alt="Cycognito Logo"/></div>
+		</div>
+		<div class="date_area">
+			<div class="select-date">
+					<div class="font-style">Filter to be applied</div>
+				<div id="date-type" class="select"></div>
+				</div>
+			<div class="date" id="date">
+					<div class="date_field">
+					<label class="font-style">Start Date</label>
+					<input type="date" id="start_date"></input>
+				</div>
+				<h4 class="between">to</h4>
+				<div class="date_field">
+					<label class="font-style">End Date</label>
+					<input type="date" id="end_date"></input>
+					</div>
+					<input type = "button" value="Apply" class="filter-btn" onclick="applyFilter()"/>
+					<input type = "button" value="Clear Date" class="filter-btn" onclick="clearFilter()"/>
+			</div>
+			<div id="error" class="error">
+			</div>
+		</div>
+		<div class = "Main">
+			<div id="ci_report_asset" class="group3" />
+			<div class="select-category">
+				<div class="font-style tooltip-ci">Filter to be applied
+					<span class="tooltiptext-ci">Apply filter on Configuration Item</span>
+				</div>
+				<div id="type" class="select"></div>
+			</div>
+		</div>
+		<div class = "Main">
+			<div id="vi_report" class="group4" />
+			<div class="select-VI">
+				<div class="select-category">
+					<div class="font-style tooltip-vi">Filter to be applied
+						<span class="tooltiptext-vi">Apply filter on Vulnerable Item</span>
+					</div>
+				<div id="vi-type" class="select"></div>
+				</div>
+			</div>
+		</div>
+ </div>
+		
+	
+</j:jelly>]]></html>
+        <name>cycognito_dashboard</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-03 10:24:01</sys_created_on>
+        <sys_id>f8b4e6288797c5506ab565b73cbb351c</sys_id>
+        <sys_mod_count>155</sys_mod_count>
+        <sys_name>cycognito_dashboard</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_ui_page_f8b4e6288797c5506ab565b73cbb351c</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-10 08:38:35</sys_updated_on>
+    </sys_ui_page>
+</record_update>

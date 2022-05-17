@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>000f16bf879b05106ab565b73cbb3589</documentkey>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sn_sec_cmn_ci_lookup_rule"&gt;
+    &lt;sn_sec_cmn_ci_lookup_rule action="INSERT_OR_UPDATE"&gt;
+        &lt;active&gt;true&lt;/active&gt;
+        &lt;condition/&gt;
+        &lt;description/&gt;
+        &lt;lookup_script/&gt;
+        &lt;method&gt;field_matching&lt;/method&gt;
+        &lt;name&gt;Asset ID&lt;/name&gt;
+        &lt;order&gt;300&lt;/order&gt;
+        &lt;reapply&gt;false&lt;/reapply&gt;
+        &lt;reapply_version&gt;0&lt;/reapply_version&gt;
+        &lt;script&gt;&lt;![CDATA[(function process(rule, sourceValue, sourcePayload) {
+
+  /*********************************
+  * CI Lookup Rule Script
+   * 
+   * Available variables:
+   * - sourceValue:  The value of the source field from incoming data that is used for lookup
+   * - rule: Reference to the lookup rule that is being evaluated
+   * - sourcePayload: All the fields from incoming data that can be used for matching CI 
+   *
+   * Return either:
+   * - the sysid of the CI that was matched by the rule
+   *  - null if there were no CI records that matched
+   **********************************/   
+
+  return null;
+})(rule, sourceValue, sourcePayload);]]&gt;&lt;/script&gt;
+        &lt;source display_value="CyCognito Vulnerability Response Integration"&gt;b65337fe87cb8d10c529da483cbb35a4&lt;/source&gt;
+        &lt;source_field&gt;ID&lt;/source_field&gt;
+        &lt;sys_created_by&gt;tap-crestds&lt;/sys_created_by&gt;
+        &lt;sys_created_on&gt;2022-05-13 12:20:27&lt;/sys_created_on&gt;
+        &lt;sys_domain&gt;global&lt;/sys_domain&gt;
+        &lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;
+        &lt;sys_id&gt;000f16bf879b05106ab565b73cbb3589&lt;/sys_id&gt;
+        &lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;
+        &lt;sys_updated_by&gt;tap-crestds&lt;/sys_updated_by&gt;
+        &lt;sys_updated_on&gt;2022-05-13 12:20:27&lt;/sys_updated_on&gt;
+        &lt;table&gt;x_cyin_cycognito_host_attributes_table&lt;/table&gt;
+        &lt;target_field&gt;serial_number&lt;/target_field&gt;
+        &lt;target_table&gt;cmdb_ci&lt;/target_table&gt;
+        &lt;type/&gt;
+    &lt;/sn_sec_cmn_ci_lookup_rule&gt;
+&lt;/record_update&gt;
+</payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-16 11:02:57</sys_created_on>
+        <sys_id>3e5aa93487ef01106ab565b73cbb3586</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Asset ID</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_metadata_link_3e5aa93487ef01106ab565b73cbb3586</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-16 11:02:57</sys_updated_on>
+        <tablename>sn_sec_cmn_ci_lookup_rule</tablename>
+    </sys_metadata_link>
+</record_update>

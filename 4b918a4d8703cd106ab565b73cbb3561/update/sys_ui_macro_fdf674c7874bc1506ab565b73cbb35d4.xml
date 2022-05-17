@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>Filetring_Html</name>
+        <scoped_name>x_cyin_cycognito_Filetring_Html</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-28 10:33:56</sys_created_on>
+        <sys_id>fdf674c7874bc1506ab565b73cbb35d4</sys_id>
+        <sys_mod_count>67</sys_mod_count>
+        <sys_name>Filetring_Html</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_ui_macro_fdf674c7874bc1506ab565b73cbb35d4</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-16 13:29:44</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<table id="filtering" style="width: 100%; align-items: center; margin-bottom: 2%;">
+		<tr class="col-sm-12">
+		<td class="addbtn col-sm-6" style="padding-top: 20px; float:right">
+				   <button onclick="addNewCriteria_asset()" type="button" id ="btn1"
+                                    class="add-criteria-row-btn btn btn-default" title="Create another set of conditions">
+									${gs.getMessage('Add New Criteria For Assets')}
+                                </button>
+			  </td>
+		<td id="issueaddbtn col-sm-6" style="padding-top: 20px; float:right">
+				 
+				   <button onclick="addNewCriteria_issue()" type="button"
+                                    class="add-criteria-row-btn btn btn-default" title="Create another set of conditions">
+									${gs.getMessage('Add New Criteria For Issues')}
+                                </button>
+				 
+			  
+			  </td>
+		</tr>
+		  <tr class="asset_field_name" id= "id_asset_field_name1" style="display: none;">
+            <td class="field col-sm-3" id= "id_field" style="padding-top: 20px; text-align:end">
+                Filtering Criteria for Assets
+            </td>
+			 <td class="field_name_dropdown col-sm-2" id = "id_field_name_dropdown" style="padding-top: 20px;" >
+                <select name="field_name" class="field_name form-control" id = "id_field_name1" style="width:200px;" onchange="changeopt(event)">
+					<option value="select" selected="1">--Select--</option>
+                    <option value="alive">Alive</option>
+					<option value="domain">Domain</option>
+					<option value="expiration">Expiration</option>
+					<option value="first-seen">First_Seen</option>
+					<option value="ip">Ip</option>
+					<option value="last-seen">Last_Seen</option>
+					<option value="locations">Locations</option>
+					<option value="open-ports">Open_Ports</option>
+					<option value="owned-by">Owned_By</option>
+					<option value="security-rating">Security_Rating</option>
+					<option value="scan-status">Scan_Status</option>
+					<option value="subject-organization">Subject_Organization</option>
+					<option value="tags">Tags</option>
+				 </select>
+            </td>
+			  <td class="type_dropdown col-sm-2" id="id_type_dropdown" style="padding-top: 20px">
+                <select name="type" class="type form-control " id = "id_type1" style="width:200px;">
+					<option value="select" selected="1">--Select--</option>
+					<option value="in">in</option>
+					<option value="not-in">not-in</option>
+				 </select>
+				  <select name="typedate" class="typedate form-control" id = "id_typedate1" style="width:200px;display:none;">
+					<option value="select" selected="1">--Select--</option>
+                    <option value="between">between</option>
+					<option value="notbetween">not between</option>
+				</select>
+            </td>
+			  <td class="textbox col-sm-4" id = "id_textbox1" style="padding-top: 20px;">
+                <textarea id="id_textboxarea1" class="textboxareaclass form-control" style="box-sizing: border-box; min-height: 30px;height: 30px;max-height: 30px;"></textarea>
+				  <input type="datetime-local" id="id_betweendate1" class="betweendate form-control" name="betweendate" style="width:45%; float:left; height:30px" ></input>
+				<input type="datetime-local" id= "id_notbetweendate1" class="notbetweendate form-control " name="notbetweendate" style="width:45%; float:right ; height:30px" ></input>
+            </td>
+			 <td class="removebtn col-sm-1" style="padding-top: 20px;">
+				 <button onclick="removeRow(event)"
+                                class="options-row-btn btn btn-icon btn-default icon-delete" type="button" 
+                                title="Remove this aggregation condition">
+                                <span class="sr-only">${gs.getMessage('Remove')}</span>
+                            </button>
+			  </td>
+		 </tr>
+		
+		 <tr class="row_issue_field_name" id="id_row_issue_field_name1" style="display: none; ">
+            <td class="issue_field  col-sm-3" style="padding-top: 20px; text-align:end">
+              Filtering Criteria for Issues 
+            </td>
+			 <td class="col-sm-2" id="issue_field_name_dropdown" style="padding-top: 20px;">
+                <select name="issue_field_name" class="issue_field_name form-control" id="id_issue_field_name1" style="width:200px;" onchange="changeopt_issue(event)">
+					<option value="select" selected="1">--Select--</option>
+					<option value="detection-complexity">Detection_Complexity</option>
+					<option value="first-seen">First_Seen</option>
+					<option value="last-seen">Last_Seen</option>
+					<option value="issue-id">Issue_Id</option>
+					<option value="issue-type">Issue_Type</option>
+					<option value="locations">Locations</option>
+					<option value="owned-by">Owned_By</option>
+					<option value="potential-impact">Potential_Impact</option>
+					<option value="score">Score</option>
+					<option value="severity">Severity</option>
+					<option value="tags">Tags</option>
+					<option value="title">Title</option>
+				 </select>
+            </td>
+			  <td class="issue_type_dropdown  col-sm-2" style="padding-top: 20px;" >
+                <select name="issue_type" id="id_issue_type1" class="issue_type form-control" style="width:200px;">
+					<option value="select" selected="1">--Select--</option>
+					<option value="in">in</option>
+					<option value="not-in">not-in</option>
+				 </select>
+				  <select name="issue_type_date" id="id_issue_type_date1" class="issue_type_date form-control " style="width:200px;display:none">
+					<option value="select" selected="1">--Select--</option>
+                    <option value="between">between</option>
+					<option value="notbetween">not between</option>
+					
+				 </select>
+            </td>
+			  <td class = "col-sm-4" id="issue_textbox  " style="padding-top: 20px;">
+                <textarea id="id_issuetextboxarea1" class="issuetextboxarea form-control" style="box-sizing: border-box; min-height: 30px;height: 30px;max-height: 30px;"></textarea>
+				   <input type="datetime-local" id="id_issue_betweendate1" class="issue_betweendate form-control " name="betweendate" style="display: none;height:30px;width:45%; float:left"></input>
+				<input type="datetime-local" id="id_issue_notbetweendate1" class="issue_notbetweendate form-control" name="notbetweendate" style="display: none;height:30px;margin-left: 20px;width:45%; float:right"></input>
+			</td>
+			<td class= "col-sm-1" id="isuueremovebtn  " style="padding-top: 20px;">
+				 <button onclick="removeRow(event)"
+                                class="options-row-btn btn btn-icon btn-default icon-delete" type="button"
+                                title="Remove this aggregation condition" >
+                                <span class="sr-only">${gs.getMessage('Remove')}</span>
+                            </button>
+			</td>
+			  
+		 </tr>
+		
+	
+		</table>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

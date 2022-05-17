@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>bd7e836f874f0150c529da483cbb35e8</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_vul_int_data_src">
+    <sn_vul_int_data_src action="INSERT_OR_UPDATE">
+        <ds_group_number>0</ds_group_number>
+        <last_used>2022-05-05 07:00:13</last_used>
+        <sn_vul_integration display_value="CyCognito Issues Integration">944ecf6f874f0150c529da483cbb35d1</sn_vul_integration>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-30 10:52:13</sys_created_on>
+        <sys_data_source display_value="CyCognito Issues 01">2fb49042878341506ab565b73cbb35e3</sys_data_source>
+        <sys_domain>global</sys_domain>
+        <sys_id>bd7e836f874f0150c529da483cbb35e8</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2022-05-05 07:00:13</sys_updated_on>
+    </sn_vul_int_data_src>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-05 09:14:25</sys_created_on>
+        <sys_id>3508a495875b4550c529da483cbb35c4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CyCognito Issues 01</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_metadata_link_3508a495875b4550c529da483cbb35c4</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-05 09:14:25</sys_updated_on>
+        <tablename>sn_vul_int_data_src</tablename>
+    </sys_metadata_link>
+</record_update>

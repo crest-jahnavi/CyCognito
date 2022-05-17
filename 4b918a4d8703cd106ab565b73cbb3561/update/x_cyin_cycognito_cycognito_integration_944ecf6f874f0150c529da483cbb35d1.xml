@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="x_cyin_cycognito_cycognito_integration">
+    <x_cyin_cycognito_cycognito_integration action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <delay>0</delay>
+        <entered_time/>
+        <instance display_value="CyCognito Integration">35e1db63878f0150c529da483cbb35fc</instance>
+        <integration display_value="CyCognito Vulnerability Response Integration">b65337fe87cb8d10c529da483cbb35a4</integration>
+        <integration_factory_script><![CDATA[/**
+  * This function serves to construct the integration script.
+  * The integration process record (integrationProcessGr) is provided in the event that stateful information is required. 
+  * The function should return the newly constructed script.  
+  */
+(function(integrationProcessGr){ 
+    // Add any logic here to construct your integration script as necessary.
+    return new x_cyin_cycognito.CyCognitoIssuesIntegrationBase();
+})(integrationProcessGr);]]></integration_factory_script>
+        <integration_script display_value="CyCognitoIssuesIntegrationBase">144e89838703cd10c529da483cbb35de</integration_script>
+        <is_template>true</is_template>
+        <name>CyCognito Issues Integration</name>
+        <next_integration/>
+        <offset/>
+        <offset_type>0</offset_type>
+        <processor_factory_script/>
+        <report_processor_script/>
+        <report_processor_strategy>DATA_SOURCE</report_processor_strategy>
+        <run_as/>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_separately>false</run_separately>
+        <run_start>2022-04-30 10:51:18</run_start>
+        <run_time>1970-01-01 08:00:00</run_time>
+        <run_type>daily</run_type>
+        <script><![CDATA[new sn_vul.VulnerabilityIntegrationUtils().addIntegrationRun(current);]]></script>
+        <sys_class_name>x_cyin_cycognito_cycognito_integration</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-30 10:51:18</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>944ecf6f874f0150c529da483cbb35d1</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>CyCognito Issues Integration</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>x_cyin_cycognito_cycognito_integration_944ecf6f874f0150c529da483cbb35d1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-17 09:06:57</sys_updated_on>
+        <time_zone/>
+        <type/>
+        <upgrade_safe>false</upgrade_safe>
+    </x_cyin_cycognito_cycognito_integration>
+</record_update>

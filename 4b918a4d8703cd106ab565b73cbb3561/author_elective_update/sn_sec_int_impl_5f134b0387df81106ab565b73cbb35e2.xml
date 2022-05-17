@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_sec_int_impl">
+    <sn_sec_int_impl action="DELETE">
+        <active>true</active>
+        <description/>
+        <integration display_value="CyCognito Vulnerability Response Integration">b65337fe87cb8d10c529da483cbb35a4</integration>
+        <is_default>false</is_default>
+        <name>Test2</name>
+        <sys_class_name>sn_sec_int_impl</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-11 07:01:36</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>5f134b0387df81106ab565b73cbb35e2</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Test2</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sn_sec_int_impl_5f134b0387df81106ab565b73cbb35e2</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-11 10:48:26</sys_updated_on>
+        <validation_status>unvalidated</validation_status>
+    </sn_sec_int_impl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</application>
+        <file_path/>
+        <instance_id>6cca6988db7f381091232f17d4961929</instance_id>
+        <instance_name>ven05073</instance_name>
+        <name>sn_sec_int_impl_5f134b0387df81106ab565b73cbb35e2</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_sec_int_impl"><sn_sec_int_impl action="INSERT_OR_UPDATE"><active>true</active><description/><integration display_value="CyCognito Vulnerability Response Integration">b65337fe87cb8d10c529da483cbb35a4</integration><is_default>false</is_default><name>Test2</name><sys_class_name>sn_sec_int_impl</sys_class_name><sys_created_by>tap-crestds</sys_created_by><sys_created_on>2022-05-11 07:01:36</sys_created_on><sys_domain>global</sys_domain><sys_id>5f134b0387df81106ab565b73cbb35e2</sys_id><sys_mod_count>4</sys_mod_count><sys_name>Test2</sys_name><sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package><sys_policy/><sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope><sys_update_name>sn_sec_int_impl_5f134b0387df81106ab565b73cbb35e2</sys_update_name><sys_updated_by>tap-crestds</sys_updated_by><sys_updated_on>2022-05-11 10:48:26</sys_updated_on><validation_status>unvalidated</validation_status></sn_sec_int_impl></record_update>]]></payload>
+        <payload_hash>1137910917</payload_hash>
+        <record_name>Test2</record_name>
+        <reverted_from/>
+        <source>dc11369a87434d10c529da483cbb35c4</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-11 10:48:26</sys_created_on>
+        <sys_id>a117f7838753c1106ab565b73cbb3505</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>180b2bbfd440000001</sys_recorded_at>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-11 10:48:26</sys_updated_on>
+        <type>Integration Instance</type>
+        <update_guid>e517f7838f53c11042dd5c37f0f5a504</update_guid>
+        <update_guid_history>e517f7838f53c11042dd5c37f0f5a504:1137910917,e0413b8f1413c1100e6af3ea54540bc6:497009708,d7a3cf438edf8110788633612ee97690:1137910917,a593cb439cdf8110d41ee1514dc07d1c:497009708,fe23430322df8110a6fac710b863486c:1137910917</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">2d1e10db8793c1106ab565b73cbb35bd</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-11 13:38:49</sys_created_on>
+        <sys_db_object display_value="" name="sn_sec_int_impl">sn_sec_int_impl</sys_db_object>
+        <sys_id>03413392277b4aa880a313e6005a6b10</sys_id>
+        <sys_metadata>5f134b0387df81106ab565b73cbb35e2</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test2</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_scope_delete display_value="">20f9fe902b164a97b557f59be8c385d1</sys_scope_delete>
+        <sys_update_name>sn_sec_int_impl_5f134b0387df81106ab565b73cbb35e2</sys_update_name>
+        <sys_update_version display_value="sn_sec_int_impl_5f134b0387df81106ab565b73cbb35e2">a117f7838753c1106ab565b73cbb3505</sys_update_version>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-11 13:38:49</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

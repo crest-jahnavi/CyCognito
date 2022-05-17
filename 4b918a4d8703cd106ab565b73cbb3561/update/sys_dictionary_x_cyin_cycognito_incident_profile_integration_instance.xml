@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_dictionary action="INSERT_OR_UPDATE" element="integration_instance" table="x_cyin_cycognito_incident_profile">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>edge_encryption_excluded=true,encode_utf8=false</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label>Integration Instance</column_label>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>integration_instance</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <internal_type display_value="Reference">reference</internal_type>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <name>x_cyin_cycognito_incident_profile</name>
+        <next_element/>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="sn_sec_int_impl">sn_sec_int_impl</reference>
+        <reference_cascade_rule>cascade</reference_cascade_rule>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual>integration=b65337fe87cb8d10c529da483cbb35a4^validation_status=unvalidated^EQ</reference_qual>
+        <reference_qual_condition table="sn_sec_int_impl">integration=b65337fe87cb8d10c529da483cbb35a4^validation_status=unvalidated^EQ<item display_table="sn_sec_int_integration" display_value="CyCognito Vulnerability Response Integration" endquery="false" field="integration" goto="false" newquery="false" operator="=" or="false" value="b65337fe87cb8d10c529da483cbb35a4"/>
+            <item display_value="unvalidated" endquery="false" field="validation_status" goto="false" newquery="false" operator="=" or="false" value="unvalidated"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </reference_qual_condition>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_dictionary</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-28 09:48:13</sys_created_on>
+        <sys_id>5b5855a5979b81102df130d3f153af8d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Integration Instance</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_dictionary_x_cyin_cycognito_incident_profile_integration_instance</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-05-17 05:52:53</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_dictionary>
+</record_update>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="CyCognito Host Attributes Table" max_length="40" name="x_cyin_cycognito_host_attributes_table" sizeclass="0" type="collection">
+        <element label="Alive" max_length="40" name="alive" type="integer"/>
+        <element label="Comment" max_length="40" name="comment" type="string"/>
+        <element label="DNS name" max_length="40" name="dns_name" type="string"/>
+        <element label="Asset ID" max_length="40" name="id" type="string"/>
+        <element label="IP Address" max_length="40" name="ip_address" type="string"/>
+        <element label="Tags" max_length="40" name="tags" type="string"/>
+        <element label="Type" max_length="40" name="type" type="string"/>
+    </element>
+</database>

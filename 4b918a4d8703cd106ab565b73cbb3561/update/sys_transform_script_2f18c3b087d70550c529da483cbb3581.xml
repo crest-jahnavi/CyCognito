@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="CyCognito Assets Transfer">a726d668875bc150c529da483cbb354c</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+	var host = {};
+    for (var key in source)
+        if (key.startsWith("u_"))
+            host[key.substring(2).toUpperCase()] = source.getValue(key);
+	
+    host["DNS_NAME"] = source.getValue("u_domain");
+    host["IP_ADDRESS"] = source.getValue("u_ip");
+    host["ID"] = source.getValue("u_asset_id");
+	host["ALIVE"] = source.getValue("u_alive");
+	
+	host["TAGS"] = source.getValue("u_tags");
+	host["TYPE"] = source.getValue("u_type");
+	host["COMMENT"] = source.getValue("u_comment");
+	
+	if (host["ALIVE"] == "true")
+		host["ALIVE"] = 5;
+	else
+		host["ALIVE"] = 6;
+		
+    var integrationRun = x_cyin_cycognito.integrationProcessGr.integration_run;
+    var sourceInstance = integrationRun.implementation;
+    
+    var hostAttributeTable = integrationRun.implementation.integration.host_attributes_table + "";
+    var hostInfoGR = new sn_vul.HostUtil().initializeHostAttributeRecord(host, hostAttributeTable);
+
+    var matchResult = new sn_vul.ImportHost().hostImport(
+        sourceInstance, host, "ID", integrationRun, 
+        false, false, source.getValue('u_first_seen'), null, null, hostInfoGR);
+	
+    if(matchResult.insert)
+      x_cyin_cycognito.cis_created++;
+    else
+      x_cyin_cycognito.cis_updated++;	
+    
+    ignore = true;
+
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-04 07:36:59</sys_created_on>
+        <sys_id>2f18c3b087d70550c529da483cbb3581</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>onBefore</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_transform_script_2f18c3b087d70550c529da483cbb3581</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-16 06:48:41</sys_updated_on>
+        <when>onBefore</when>
+    </sys_transform_script>
+</record_update>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
+    <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
+        <dependency display_value="System Import Sets" source="com.glide.system_import_set">00e58cb121120110a866589604c20df7</dependency>
+        <min_version>1.0.0</min_version>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-25 05:31:18</sys_created_on>
+        <sys_id>4b5855a5979b81102df130d3f153af43</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-04-25 05:31:18</sys_updated_on>
+    </sys_package_dependency_m2m>
+</record_update>

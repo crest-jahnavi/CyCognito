@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_cyin_cycognito.CyCognitoAssetsIntegrationBase</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CyCognitoAssetsIntegrationBase</name>
+        <script><![CDATA[var CyCognitoAssetsIntegrationBase = Class.create();
+CyCognitoAssetsIntegrationBase.prototype = Object.extendsObject(sn_vul.VulnerabilityIntegrationBase, {
+    initialize: function() {
+        this.count = gs.getProperty('x_cyin_cycognito.page_size_on_cloud');
+        gs.include("CyCognitoConstants");
+        this.assetsTypeList = ["ip", "cert", "domain", "webapp", "iprange"];
+        this.assetsListLength = this.assetsTypeList.length;
+        this.utils = new CyCognitoUtils();
+    },
+
+    /**
+     * Function to fetch assets data from CyCognito
+     */
+    retrieveData: function() {
+
+        var integrationSysId = this.integrationGr.sys_id + "";
+        this.integrationGr = new GlideRecord(CYCOGNITO_INTEGRATION_TABLE);
+
+        if (!this.integrationGr.get(integrationSysId)) {
+            throw new Error("No CyCognito integration found");
+        }
+
+        var config = this.utils.setConfig(this.integrationGr.instance + "");
+        this._determineProcessParameters();
+
+        if (this.integrationGr.instance.validation_status != 'valid' || !this._validateConfig(config))
+            throw new Error("Cannot run integration without Authentication Configuration");
+
+        try {
+            this.requestBody = JSON.parse(this.utils.getRequestBodyFromProfile(this.integrationGr));
+            var fileName = this.integrationGr.name + "_" + new GlideDateTime() + ".json";
+
+            var requestParameter = {
+                "endpoint": BASE_URL + "/v0/tap-crestds-acme/assets/" + this.assetsTypeList[this.processParams.assetIndex],
+                "offset": this.processParams.page + '',
+                "requestBody": JSON.stringify(this.requestBody.assets),
+                "key": config.key + ''
+            };
+            var msg = this.utils.buildRestMessage(requestParameter);
+            var resp = msg.executeAsync();
+            resp.waitForResponse(10);
+
+            var statusCode = resp.getStatusCode();
+            if (statusCode != 200) {
+                var errorMessage = this.utils.handleStatusCode(statusCode);
+                throw new Error(errorMessage);
+            }
+
+            var resBody = JSON.parse(resp.getBody());
+
+            // If invalid key inserted
+            if (!gs.nil(resBody.error)) {
+                var message = "";
+                if (!gs.nil(resBody.message)) {
+                    message = resBody.message;
+                } else {
+                    message = "Invalid or Expired token found in Integration Record with name " + this.integrationGr.name;
+                }
+
+                throw new Error(message);
+            }
+            resBody = {
+                "events": resBody
+            };
+            var responseBody = JSON.stringify(resBody);
+            var responseLength = 0;
+            if (!gs.nil(resBody["events"]))
+                responseLength = resBody["events"].length;
+
+
+            // If empty response received
+            if (responseLength < this.count || responseLength == 0) {
+
+                // If data is fetched from all the asset types 
+                if (this.processParams.assetIndex == this.assetsListLength - 1)
+                    this.hasMoreData(false);
+                else {
+                    // Data fetch from one asset type is completed
+                    this.processParams.assetIndex += 1;
+                    this.processParams.page = 0;
+                    this.hasMoreData(true);
+                }
+            } else {
+                this.processParams.page += 1;
+                this.hasMoreData(true);
+            }
+
+            // Create attachment for response
+            var attachmentGr = new GlideSysAttachment();
+            var sys_id = attachmentGr.write(this.integrationProcessGr, fileName, "json", responseBody);
+
+            var obj = {
+                contents: sys_id,
+                contentType: "sys_attachment",
+                extension: "json"
+            };
+            this._handlePagination();
+            return obj;
+        } catch (e) {
+            gs.warn("[CyCognito] Error while fetching CyCognito Assets. Exception: " + e);
+            throw new Error("[CyCognito] Error while fetching CyCognito Assets. Exception: " + e);
+        }
+    },
+    /**
+     * Validate configuration
+     */
+    _validateConfig: function(config) {
+        if (gs.nil(config.key))
+            return false;
+        return true;
+    },
+
+    /**
+     * Function to determine process parameter parameter
+     */
+    _determineProcessParameters: function() {
+        this.processParams = this._getProcessParameters() || {};
+
+        if (gs.nil(this.processParams.page)) {
+            this.processParams.page = 0;
+            this.processParams.assetIndex = 0;
+        }
+    },
+
+    /**
+     * Function to handle pagination
+     */
+    _handlePagination: function() {
+        var nextRunParams = {};
+        nextRunParams = {
+            page: this.processParams.page,
+            assetIndex: this.processParams.assetIndex
+        };
+        this.setNextRunParameters(nextRunParams);
+    },
+
+    type: 'CyCognitoAssetsIntegrationBase'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-03 08:18:50</sys_created_on>
+        <sys_id>0c2846e8871bc150c529da483cbb35e8</sys_id>
+        <sys_mod_count>65</sys_mod_count>
+        <sys_name>CyCognitoAssetsIntegrationBase</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_script_include_0c2846e8871bc150c529da483cbb35e8</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-17 07:32:30</sys_updated_on>
+    </sys_script_include>
+</record_update>

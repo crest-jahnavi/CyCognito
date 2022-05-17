@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="u_issuer_common_name" label="issuer_common_name" language="en" table="x_cyin_cycognito_cycognito_assets_staging_table">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>u_issuer_common_name</element>
+            <help/>
+            <hint/>
+            <label>issuer_common_name</label>
+            <language>en</language>
+            <name>x_cyin_cycognito_cycognito_assets_staging_table</name>
+            <plural>issuer_common_names</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>tap-crestds</sys_created_by>
+            <sys_created_on>2022-05-03 11:55:48</sys_created_on>
+            <sys_id>4f5855a5979b81102df130d3f153af1d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>issuer_common_name</sys_name>
+            <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+            <sys_update_name>sys_documentation_x_cyin_cycognito_cycognito_assets_staging_table_u_issuer_common_name_en</sys_update_name>
+            <sys_updated_by>tap-crestds</sys_updated_by>
+            <sys_updated_on>2022-05-03 11:55:48</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

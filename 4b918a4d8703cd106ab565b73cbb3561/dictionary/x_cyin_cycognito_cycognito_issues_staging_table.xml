@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="CyCognito Issues Staging Table" max_length="40" name="x_cyin_cycognito_cycognito_issues_staging_table" sizeclass="9886" type="collection">
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=comment" label="comment" max_length="1024" name="u_comment" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=continent" label="continent" max_length="40" name="u_continent" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=detection-complexity" label="detection-complexity" max_length="40" name="u_detection_complexity" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=exploitation-method" label="exploitation-method" max_length="40" name="u_exploitation_method" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=exploitation-score" label="exploitation-score" max_length="40" name="u_exploitation_score" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=first-detected" label="first-detected" max_length="40" name="u_first_detected" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=id" label="id" max_length="100" name="u_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=investigation-status" label="investigation-status" max_length="40" name="u_investigation_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=issue-id" label="issue-id" max_length="40" name="u_issue_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=issue-status" label="issue-status" max_length="40" name="u_issue_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=issue-type" label="issue-type" max_length="40" name="u_issue_type" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=last-detected" label="last-detected" max_length="40" name="u_last_detected" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=locations" label="locations" max_length="512" name="u_locations" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=owned-by" label="owned-by" max_length="40" name="u_owned_by" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=owners" label="owners" max_length="512" name="u_owners" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=potential_impact" label="potential_impact" max_length="1024" name="u_potential_impact" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=references" label="references" max_length="1024" name="u_references" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=region" label="region" max_length="40" name="u_region" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=remediation_steps" label="remediation_steps" max_length="1024" name="u_remediation_steps" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=resolved-at" label="resolved-at" max_length="40" name="u_resolved_at" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=severity" label="severity" max_length="40" name="u_severity" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=severity-score" label="severity-score" max_length="40" name="u_severity_score" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=summary" label="summary" max_length="4000" name="u_summary" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=tags" label="tags" max_length="1000" name="u_tags" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=target" label="target" max_length="40" name="u_target" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=threat" label="threat" max_length="40" name="u_threat" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=title" label="title" max_length="512" name="u_title" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=type" label="type" max_length="40" name="u_type" type="string"/>
+    </element>
+</database>

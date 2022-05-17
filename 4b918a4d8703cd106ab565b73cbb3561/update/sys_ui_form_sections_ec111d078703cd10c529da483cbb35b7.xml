@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_form_sections form_id="ec111d078703cd10c529da483cbb35b7" sys_domain="global" table="x_cyin_cycognito_cycognito_integration" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>tap-crestds</sys_created_by>
+            <sys_created_on>2022-04-28 12:27:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a8119d078703cd10c529da483cbb3574</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_cyin_cycognito_cycognito_integration" name="x_cyin_cycognito_cycognito_integration" sys_domain="global" view="Default view">ec111d078703cd10c529da483cbb35b7</sys_ui_form>
+            <sys_ui_section caption="NULL" display_value="" name="x_cyin_cycognito_cycognito_integration" sys_domain="global" view="Default view">2c111d078703cd10c529da483cbb35ba</sys_ui_section>
+            <sys_updated_by>tap-crestds</sys_updated_by>
+            <sys_updated_on>2022-04-28 12:27:25</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>tap-crestds</sys_created_by>
+            <sys_created_on>2022-04-28 12:27:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6c119d078703cd10c529da483cbb3578</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_cyin_cycognito_cycognito_integration" name="x_cyin_cycognito_cycognito_integration" sys_domain="global" view="Default view">ec111d078703cd10c529da483cbb35b7</sys_ui_form>
+            <sys_ui_section caption="Integration Details" display_value="Integration Details" name="x_cyin_cycognito_cycognito_integration" sys_domain="global" view="Default view">24119d078703cd10c529da483cbb3575</sys_ui_section>
+            <sys_updated_by>tap-crestds</sys_updated_by>
+            <sys_updated_on>2022-04-28 12:27:25</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>x_cyin_cycognito_cycognito_integration</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>tap-crestds</sys_created_by>
+            <sys_created_on>2022-04-28 12:27:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ec111d078703cd10c529da483cbb35b7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_cyin_cycognito_cycognito_integration</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+            <sys_update_name>sys_ui_form_sections_ec111d078703cd10c529da483cbb35b7</sys_update_name>
+            <sys_updated_by>tap-crestds</sys_updated_by>
+            <sys_updated_on>2022-04-28 12:27:25</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>configuration_navigator</name>
+        <scoped_name>x_cyin_cycognito_configuration_navigator</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-25 06:51:06</sys_created_on>
+        <sys_id>b7376c8687cfc910c529da483cbb35a4</sys_id>
+        <sys_mod_count>128</sys_mod_count>
+        <sys_name>configuration_navigator</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_ui_macro_b7376c8687cfc910c529da483cbb35a4</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-17 06:24:43</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<g:inline template="x_cyin_cycognito_tab_matrix.xml" />
+<g:inline template="x_cyin_cycognito_Filtering.xml" />
+
+	<script>
+		g_tabs_preference = true;
+			var stepsAPI = {
+		    _INSERT: 'sysverb_insert',
+			_FINISH: 'sysverb_update',
+			_STAY: 'sysverb_update_and_stay',
+			_STEP: 'x_cyin_cycognito_incident_profile_step',
+			
+			_saveValsChanged: function() {
+				var names = ['name'];
+				return names.some(function(n){ return g_form.getControl(n).changed });
+			},
+		
+			_submit: function(verb) {				
+				bgoverlay.show();
+				gsftSubmit(gel(verb));
+				bgoverlay.hide();
+			},
+		
+			_submitFailed: function() {				
+				return g_form.getActionName() == this._STAY;
+			},
+		
+		
+			_getStep: function() {				
+				var pattern = RegExp(this._STEP + "=.[^;,]*");
+				var matched = document.cookie.match(pattern);
+		
+				if(matched) {
+					document.cookie = this._STEP + '=, expires=Thu, 01 Jan 1970 00:00:01 GMT';
+					return +(matched[0].split('=')[1]) | 0;
+				}
+		
+				return 0;
+			},
+		
+			_setStep: function(step) {
+				document.cookie = this._STEP + '=' + step + ', HttpOnly';
+			},
+		
+			_setCustomStyles: function() {
+				if (g_form.newRecord)
+					$j('#tabs2_section .tabs2_tab:gt(0)').addClass('disabled');
+
+				$j('.form_action_button_container').before(this.renderButtons());
+				this.showButtons();
+			},
+		
+		
+			init: function() {				
+				var step = this._getStep();				
+				g_tabs2Sections.setActive(step);
+
+				<!-- For New records -->
+				if(g_form.isNewRecord()){
+					if(g_tabs2Sections.activeTab != 0){
+						g_tabs2Sections.setActive(0);
+					}
+				}
+				
+		
+				if(g_tabs2Sections.activeTab == 1 $[JS:AND] !this._submitFailed()){
+					if($j('#output_messages .outputmsg_text').eq(0).text() == "An active configuration with same source is already exists."){
+						var prev = tabMatrix.getPrev(g_tabs2Sections.activeTab)
+						this._setStep(prev);
+						g_tabs2Sections.setActive(prev);
+					}
+				}
+
+				this._setCustomStyles();				
+				$j('#tabs2_section .tabs2_tab').on('click', function() {
+					try{
+						matrix.submit();
+						matrix.render_values();
+						if(stepsAPI._tabIdx ${JS:AMP}lt; 3 $[JS:AND] stepsAPI._saveValsChanged()) {	
+							var elem = this.parentElement;
+							var ix = 0;
+							while((elem = elem.previousSibling) != null)
+								ix++;		
+
+							stepsAPI._setStep(ix);
+							stepsAPI._submit(stepsAPI._STAY);
+
+							if(stepsAPI._submitFailed())
+								g_tabs2Sections.setActive(ix);
+						}										
+						stepsAPI.showButtons();
+					}catch(e){
+						stepsAPI._setStep(1);
+						g_tabs2Sections.setActive(1);
+					}
+					
+
+				});
+				
+		
+				setTimeout(function() { setTimeout(function() {
+					bgoverlay.hide();
+				}); });
+			},
+		
+			showButtons: function() {
+				this._tabIdx = g_tabs2Sections.activeTab;
+		
+				var show = function(id) {
+					$j('#' + id + '').toggle(true);
+				};
+		
+				var hide = function(id) {
+					$j('#' + id + '').toggle(false);
+				};
+		
+				var first = tabMatrix.isFirst(this._tabIdx);
+				if(first) {
+					hide("configuration_previous_button");
+				} else {
+					show("configuration_previous_button");
+				}
+				
+				if(tabMatrix.isLast(this._tabIdx)) {
+					hide("configuration_continue_button");
+					show("configuration_finish_button");
+				} else {
+					show("configuration_continue_button");
+					hide("configuration_finish_button");
+					
+				}
+				g_form.setReadOnly('name', !first);
+			},
+		
+			renderButtons: function() {
+				var _CONFIGURATION_CONTINUE_BUTTON = 'configuration_continue_button';
+				var _CONFIGURATION_PREVIOUS_BUTTON = 'configuration_previous_button';
+				var _CONFIGURATION_FINISH_BUTTON = 'configuration_finish_button';
+				
+
+				var prevButton = $j('<button />', {
+					id: _CONFIGURATION_PREVIOUS_BUTTON,
+					type: "button",
+					"class": "form_action_button header action_context btn btn-default " + _CONFIGURATION_PREVIOUS_BUTTON,
+					onclick: "stepsAPI.previousTab()",
+					title: getMessage('Return to the prior step of the configuration'),
+					text: getMessage('Previous'),
+					style: 'display: none;'
+				});
+
+				var nextButton = $j('<button />', {
+					id: _CONFIGURATION_CONTINUE_BUTTON,
+					type: "button",
+					"class": "form_action_button header action_context btn btn-primary " + _CONFIGURATION_CONTINUE_BUTTON,
+					onclick: "stepsAPI.nextTab()",
+					title: getMessage('Continue to the next step of the configuration'),
+					text: getMessage('Next'),
+					style: 'display: none;'
+				});
+
+				var finishButton = $j('<button />', {
+					id: _CONFIGURATION_FINISH_BUTTON,
+					type: "button",
+					"class": "form_action_button header action_context btn btn-primary " + _CONFIGURATION_FINISH_BUTTON,
+					onclick: "stepsAPI.finish()",
+					title: getMessage('Complete editing and save the configuration'),
+					text: getMessage('Finish'),
+					style: 'display: none;'
+				});
+				var container = $j('<div />', {
+					id: 'cycognito_configuration_button_container',
+					style: 'float:right;'
+				});
+		
+				container
+					.append(prevButton)
+					.append(nextButton)
+					.append(finishButton);
+
+				container.children().each(function(){
+					$j(this).keypress(function(evt){
+						var code = evt.keyCode ? evt.keyCode : evt.which;
+						if (code != 13) //enter key
+							return;
+						if(this.id == _CONFIGURATION_CONTINUE_BUTTON)
+							stepsAPI.nextTab();
+						else if(this.id == _CONFIGURATION_PREVIOUS_BUTTON)
+							stepsAPI.previousTab();
+					});
+				});	
+		
+				return container;
+			},
+		
+			
+		nextTab: function() {
+				var missing = g_form.getMissingFields();
+				
+				if(0 != missing.length) {
+					this._submit(this._STAY);
+					return;
+				}
+		
+				<!-- if(tabMatrix.isLast(g_tabs2Sections.activeTab))
+				{
+					alert("Inside matrix submit");
+					matrix.submit();
+				} -->
+				
+				if(tabMatrix.isFirst(g_tabs2Sections.activeTab) $[JS:AND] !g_form.isNewRecord())
+				{
+					matrix.render_values();
+				}
+				var next = tabMatrix.getNext(g_tabs2Sections.activeTab);
+				if(g_form.newRecord || 
+				(g_tabs2Sections.activeTab ${JS:AMP}lt; 2 $[JS:AND] this._saveValsChanged())) {
+					this._setStep(next);
+					this._submit(this._STAY);
+				}
+
+				if(g_tabs2Sections.activeTab != 0 || !this._submitFailed()) {
+					this._setStep(next);
+					g_tabs2Sections.setActive(next);
+				}
+				<!-- if (tabMatrix.isLast(g_tabs2Sections.activeTab))
+				{
+					alert("Inside isLast");
+					this._setStep(0);
+				}
+				 -->
+				<!-- if(tabMatrix.isLast(g_tabs2Sections.activeTab))
+				{
+					
+					matrix.submit();
+				}
+				
+				if(tabMatrix.isSecond(g_tabs2Sections.activeTab))
+				{
+					matrix.render_values();
+				} -->
+
+				this.showButtons();
+			},
+		
+		    previousTab: function() {
+				var missing = g_form.getMissingFields()
+				if(0 != missing.length) {
+					this._submit(this._STAY);
+					return;
+				}
+		
+				if(g_tabs2Sections.activeTab > 0) {
+					g_tabs2Sections.setActive(tabMatrix.getPrev(g_tabs2Sections.activeTab));
+					
+				}
+
+				this.showButtons();
+			},
+		finish:function(){
+		
+			if(tabMatrix.isLast(g_tabs2Sections.activeTab))
+				{
+					matrix.submit();
+				}
+				if (tabMatrix.isLast(g_tabs2Sections.activeTab))
+				{
+					this._setStep(0);
+				}
+		this._submit(this._FINISH);
+		
+
+		}
+		
+	
+		};
+		
+		var bgoverlay = $j('<div id="sapload"><br/><br/><br/><br/><i class="icon-loading"></i><br/><p>' 
+			+ getMessage("Loading CyCognito Configuration Panel....") + '</p></div>')
+		  .attr('id', 'bgoverlayloading')
+		  .css({
+			width: '100%',
+			height: '100%',
+			'background-color': '#fff',
+			position: 'absolute',
+			color: '#000',
+			'z-index': 99,
+			margin: '0 auto',
+			'text-align': 'center'
+		  });
+
+		$j('body').prepend(bgoverlay);
+
+		$j(document).ready(function(){ setTimeout(function() {			
+			
+			stepsAPI.init(); 
+		
+		}, 0); });
+	</script>
+	<style>
+		
+		.date-calendar {
+			display: inline-block;
+		}
+		
+		.tabs2_section .section {
+			border: 0px none !important;
+		}
+		
+		#tabs2_section .label_description, .form_action_button_container {
+			display: none !important;
+		}
+		
+		#tabs2_spacer {
+			max-height: 10px !important;
+		}
+		
+		#tabs2_section {
+            display: table !important;
+		    border: 1px solid #bdc0c4;            
+			position:relative;
+			top: -30px;
+		}
+		#tabs2_section .tab_caption_text {
+			display:table-cell;
+			width: 100%;
+			margin-top: 8px;
+			max-width: none;
+			color: inherit;
+		}
+		
+		#tabs2_section .tab_header {
+			display: table-cell;
+			width: 34%;
+		}
+
+		#tabs2_section .tabs2_active{
+			border-bottom: 4px solid #278efc !important;
+			float: left;
+			padding: 5px 8px;
+			margin-block-end: -1px;
+		}
+		
+		#tabs2_section .tabs2_tab {
+			height: 46px;
+		    background-color: transparent;
+			border: 0px;
+		}
+		
+		#tabs2_section .tabs2_blocked {
+			color: #b3bcc7 !important;
+			cursor: default;
+			border-bottom: 0px !important;
+			pointer-events: none !important;
+		}
+		
+		#tabs2_section .tabs2_tab:hover {
+			border-bottom: 4px solid #278efc;
+		}
+		
+		#tabs2_section .tabs2_tab:focus {
+			outline-style:none;
+			box-shadow:none;
+			border-color:transparent;
+		}
+		
+		#tabs2_section .disabled {
+			color: #b3bcc7 !important;
+			cursor: default;
+			border-bottom: 0px !important;
+			pointer-events: none !important;
+		}
+		
+		#tabs2_section .tab_header:not(:first-child):after {
+			display: block;
+			height: 33px;
+			width: 33px;
+			position: relative;
+			top: 6px;
+			right: 18px;
+			border-top: 1px solid #bdc0c4;
+			border-right: 1px solid #bdc0c4;
+			background-color: transparent;
+			content: ' ';
+			-moz-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+	
+		
+		#tabs2_section .tabs2_tab, #tabs2_section .tab_caption_text {
+			display: table-cell;
+			width: 100%;
+			text-align: center;
+		}
+		
+		div.tabs2_strip{
+            padding-block-start: 0px;
+            background-color: RGB(var(--now-color_background--secondary,var(--now-color--neutral-1,246,246,248)));
+        }
+
+        .notification{
+            position: unset;
+            min-height: 32px;
+            margin-block-end: 17px;
+        }
+        
+        #tabs2_section .tabs2_tab {
+            padding: 5px 8px;
+            padding-top: 5px;
+            padding-right: 8px;
+            padding-bottom: 5px;
+            padding-left: 8px;
+            float: left;
+        }
+		
+	</style>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

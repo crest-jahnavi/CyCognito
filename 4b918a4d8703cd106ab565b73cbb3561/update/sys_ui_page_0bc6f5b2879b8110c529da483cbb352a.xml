@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>Support Contact Page</description>
+        <direct>false</direct>
+        <endpoint>x_cyin_cycognito_support_contact.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<div style="font-size: 15px; width:500px; margin: 50px auto; text-align: center;" >
+		<p style="text-align: center;">
+			<img src="CycognitoLogo.png" alt="CyCognito Logo" width="230" height="100"/>
+		</p>
+		<h2 style="text-align: center; margin-top:20px;">
+			<strong>CyCognito Support Contact</strong>
+		</h2>
+		<!-- <span><strong>Contact Details: &#160;</strong></span><a style="width: 600px; margin: 0 auto;" align="center" rel="noopener noreferrer nofollow" href = "https://platform.cycognito.com/" target="_blank" onClick="return confirm('You will be redirected to an external website. Continue?')">https://platform.cycognito.com/</a> -->
+		<p >
+			<strong>E-mail: &#160;</strong><span style="color:#1f8476;"> support@cycognito.com </span>
+			
+		</p>
+
+	</div>
+</j:jelly>]]></html>
+        <name>support_contact</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-10 06:51:17</sys_created_on>
+        <sys_id>0bc6f5b2879b8110c529da483cbb352a</sys_id>
+        <sys_mod_count>29</sys_mod_count>
+        <sys_name>support_contact</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_ui_page_0bc6f5b2879b8110c529da483cbb352a</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-17 05:16:04</sys_updated_on>
+    </sys_ui_page>
+</record_update>

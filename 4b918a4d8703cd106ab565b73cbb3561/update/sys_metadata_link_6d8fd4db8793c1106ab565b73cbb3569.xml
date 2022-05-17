@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>374e7a30875309506ab565b73cbb3584</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="x_cyin_cycognito_incident_profile">
+    <x_cyin_cycognito_incident_profile action="INSERT_OR_UPDATE">
+        <description/>
+        <from_date/>
+        <initial_ingestion>false</initial_ingestion>
+        <integration_instance display_value="CyCognito Integration">35e1db63878f0150c529da483cbb35fc</integration_instance>
+        <key/>
+        <last_pulled_date/>
+        <mapping_data>{"issues":[{"field":"issue-type","op":"in","values":["Unsafe Authentication"]}],"assets":[{"field":"alive","op":"in","values":["true"]}]}</mapping_data>
+        <name>Demo</name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-04 06:54:22</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>374e7a30875309506ab565b73cbb3584</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-11 10:52:46</sys_updated_on>
+    </x_cyin_cycognito_incident_profile>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-11 13:45:07</sys_created_on>
+        <sys_id>6d8fd4db8793c1106ab565b73cbb3569</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Demo</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_metadata_link_6d8fd4db8793c1106ab565b73cbb3569</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-11 13:45:07</sys_updated_on>
+        <tablename>x_cyin_cycognito_incident_profile</tablename>
+    </sys_metadata_link>
+</record_update>

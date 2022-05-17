@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="CyCognito App for Vulnerability Response">f6320a4587cf8d106ab565b73cbb35da</application>
+        <assessment/>
+        <device_type/>
+        <filter table="sn_sec_int_impl">integration=b65337fe87cb8d10c529da483cbb35a4^EQ<item display_table="sn_sec_int_integration" display_value="CyCognito Vulnerability Response Integration" endquery="false" field="integration" goto="false" newquery="false" operator="=" or="false" value="b65337fe87cb8d10c529da483cbb35a4"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>LIST</link_type>
+        <map_page/>
+        <mobile_title>Integration Instances</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>sn_sec_int_impl</name>
+        <order>200</order>
+        <override_menu_roles>false</override_menu_roles>
+        <query/>
+        <report/>
+        <roles>x_cyin_cycognito.cycognito_admin</roles>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-28 09:59:53</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>441f28cb878f8d10c529da483cbb3518</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Integration Instances</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_app_module_441f28cb878f8d10c529da483cbb3518</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-02 11:44:11</sys_updated_on>
+        <timeline_page/>
+        <title>Integration Instances</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+</record_update>

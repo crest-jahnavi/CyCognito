@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>from_date</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>FutureDateNotAllowed</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading) {
+	//Function checks whether from date is less than or equal to today's date or not.
+
+    if (isLoading || newValue == '') {
+
+        return;
+
+    }
+
+    var today = new Date();
+
+    var start = new Date(g_form.getValue('from_date'));
+
+    //g_form.hideFieldMsg('from_date');
+
+    if (start > today)
+    {
+        g_form.showFieldMsg('from_date', 'Start date must be in the future.', 'error');
+        g_form.clearValue('from_date');
+
+    }
+
+
+
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-26 12:21:24</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>414c32d287834d10c529da483cbb35b0</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>FutureDateNotAllowed</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_script_client_414c32d287834d10c529da483cbb35b0</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-06 10:10:36</sys_updated_on>
+        <table>x_cyin_cycognito_incident_profile</table>
+        <type>onChange</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</application>
+        <file_path/>
+        <instance_id>6cca6988db7f381091232f17d4961929</instance_id>
+        <instance_name>ven05073</instance_name>
+        <name>sys_script_client_414c32d287834d10c529da483cbb35b0</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description/&gt;&lt;field&gt;from_date&lt;/field&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;FutureDateNotAllowed&lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onChange(control, oldValue, newValue, isLoading) {
+	//Function checks whether from date is less than or equal to today's date or not.
+
+    if (isLoading || newValue == '') {
+
+        return;
+
+    }
+
+    var today = new Date();
+
+    var start = new Date(g_form.getValue('from_date'));
+
+    //g_form.hideFieldMsg('from_date');
+
+    if (start &gt; today)
+    {
+        g_form.showFieldMsg('from_date', 'Start date must be in the future.', 'error');
+        g_form.clearValue('from_date');
+
+    }
+
+
+
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;tap-crestds&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-04-26 12:21:24&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;414c32d287834d10c529da483cbb35b0&lt;/sys_id&gt;&lt;sys_mod_count&gt;12&lt;/sys_mod_count&gt;&lt;sys_name&gt;FutureDateNotAllowed&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito"&gt;4b918a4d8703cd106ab565b73cbb3561&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="CyCognito App for Vulnerability Response"&gt;4b918a4d8703cd106ab565b73cbb3561&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_414c32d287834d10c529da483cbb35b0&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;tap-crestds&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-05-06 10:10:36&lt;/sys_updated_on&gt;&lt;table&gt;x_cyin_cycognito_incident_profile&lt;/table&gt;&lt;type&gt;onChange&lt;/type&gt;&lt;ui_type&gt;0&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-795795556</payload_hash>
+        <record_name>FutureDateNotAllowed</record_name>
+        <reverted_from/>
+        <source>dc11369a87434d10c529da483cbb35c4</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-06 10:10:36</sys_created_on>
+        <sys_id>2a7ef1e1875b8550c529da483cbb3593</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18098d98f8a0000001</sys_recorded_at>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-06 10:10:36</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>227ef1e15b5b85507e8d80fc81548b93</update_guid>
+        <update_guid_history>227ef1e15b5b85507e8d80fc81548b93:-795795556,3c46f9e9001b8550c09388a60698a502:642057998,330a996537d7855054e8bcbdea674b9e:255344524,f50ad965d1d78550b984ced8ba45a731:-184218612,12b85925e9d785507b6078ca79f32161:-536336362,3288dde106d7855009d6774ecf8a9245:-1164171982,34a78b260a8f4d103ae66871da9e4c26:-569998875,45528f22148f4d109f4204fcb3f0a81b:-1634168712,c4ce76ae634f4d10f1a10928e67f1ea9:-569998875,4c1307d6ff834d10b64ed798281485d9:-893794813,9da2cfd6e5834d106a342d833f714e06:1584133136,380efad2c4834d10a142941978128cc3:-659501314,858cf2d2d2834d10af9ab2e814a295c7:2090743340</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-05-16 12:57:13</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>17f1d43c07b446b3887035f9d2bffe61</sys_id>
+        <sys_metadata>414c32d287834d10c529da483cbb35b0</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>FutureDateNotAllowed</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_parent display_value="">e1228a8d8703cd106ab565b73cbb35e7</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_scope_delete display_value="">20f9fe902b164a97b557f59be8c385d1</sys_scope_delete>
+        <sys_update_name>sys_script_client_414c32d287834d10c529da483cbb35b0</sys_update_name>
+        <sys_update_version display_value="sys_script_client_414c32d287834d10c529da483cbb35b0">2a7ef1e1875b8550c529da483cbb3593</sys_update_version>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-05-16 12:57:13</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

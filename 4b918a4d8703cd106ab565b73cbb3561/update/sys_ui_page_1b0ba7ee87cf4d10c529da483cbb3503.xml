@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function ok() {
+        g_form.setValue("state", "inactive");
+
+    if (g_form.isNewRecord())
+        gsftSubmit(document.getElementById('sysverb_insert'));
+    else
+        gsftSubmit(document.getElementById('sysverb_update'));
+	
+    stepsAPI._setStep(0);
+    return true;
+}
+
+function cancel() {
+    GlideDialogWindow.get().destroy();
+    return false;
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_cyin_cycognito_save_confirm.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <div style="text-align:left;">
+    <br/>
+    <div> ${gs.getMessage('This configuration is inactive. Configuration must be changed to active to run Securonix Data Collection.')} </div><br/>
+    <br/>
+    <div text-align="right" class="modal-footer">
+        <g:dialog_buttons_ok_cancel ok="return ok()" ok_style_class="btn btn-primary" ok_text="${gs.getMessage('Finish')}" cancel="return cancel()" ok_type="button" cancel_type="button"/>
+    </div>
+    </div>
+    <script>
+       document.getElementById("ok_button").focus();
+    </script>
+
+</j:jelly>]]></html>
+        <name>save_confirm</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-27 10:25:55</sys_created_on>
+        <sys_id>1b0ba7ee87cf4d10c529da483cbb3503</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>save_confirm</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_ui_page_1b0ba7ee87cf4d10c529da483cbb3503</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-04-28 04:56:12</sys_updated_on>
+    </sys_ui_page>
+</record_update>

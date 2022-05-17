@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Authentication Configuration" max_length="40" name="x_cyin_cycognito_incident_profile" sizeclass="1" type="collection">
+        <element label="Description" max_length="1024" name="description" type="string"/>
+        <element label="From Date" max_length="40" name="from_date" type="glide_date_time"/>
+        <element label="Initial Ingestion" max_length="40" name="initial_ingestion" type="boolean"/>
+        <element attributes="edge_encryption_excluded=true,encode_utf8=false" label="Integration Instance" mandatory="true" max_length="32" name="integration_instance" reference="sn_sec_int_impl" reference_cascade_rule="cascade" reference_qual="integration=b65337fe87cb8d10c529da483cbb35a4^validation_status=unvalidated^EQ" reference_qual_condition="integration=b65337fe87cb8d10c529da483cbb35a4^validation_status=unvalidated^EQ" type="reference"/>
+        <element label="API Key" mandatory="true" max_length="255" name="key" type="password2"/>
+        <element label="Last Pulled Date" max_length="40" name="last_pulled_date" type="glide_date_time"/>
+        <element default="{&quot;issues&quot;:[{&quot;field&quot;:&quot;issue-type&quot;,&quot;op&quot;:&quot;in&quot;,&quot;values&quot;:[&quot;Unsafe Authentication&quot;]}],&quot;assets&quot;:[{&quot;field&quot;:&quot;alive&quot;,&quot;op&quot;:&quot;in&quot;,&quot;values&quot;:[&quot;true&quot;]}]}" label="Mapping_Data" max_length="5000" name="mapping_data" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Name" mandatory="true" max_length="40" name="name" type="string"/>
+        <element label="Domain" max_length="32" name="sys_domain" type="domain_id"/>
+        <index name="index">
+            <element name="integration_instance"/>
+        </index>
+        <index name="index2">
+            <element name="sys_domain"/>
+        </index>
+    </element>
+</database>

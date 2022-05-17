@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Number of incidents to pull in one HTTP call for On-Cloud deployment</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_cyin_cycognito.page_size_on_cloud</name>
+        <read_roles>x_cyin_cycognito.cycognito_admin</read_roles>
+        <suffix>page_size_on_cloud</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>tap-crestds</sys_created_by>
+        <sys_created_on>2022-04-25 07:10:36</sys_created_on>
+        <sys_id>bd6b604287c341506ab565b73cbb3572</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_cyin_cycognito.page_size_on_cloud</sys_name>
+        <sys_package display_value="CyCognito App for Vulnerability Response" source="x_cyin_cycognito">4b918a4d8703cd106ab565b73cbb3561</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CyCognito App for Vulnerability Response">4b918a4d8703cd106ab565b73cbb3561</sys_scope>
+        <sys_update_name>sys_properties_bd6b604287c341506ab565b73cbb3572</sys_update_name>
+        <sys_updated_by>tap-crestds</sys_updated_by>
+        <sys_updated_on>2022-04-25 07:10:36</sys_updated_on>
+        <type>integer</type>
+        <value>1000</value>
+        <write_roles>x_cyin_cycognito.cycognito_admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=bd6b604287c341506ab565b73cbb3572"/>
+</record_update>
